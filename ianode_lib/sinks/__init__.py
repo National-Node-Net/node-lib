@@ -1,7 +1,6 @@
-
-
-from telicent_lib.records import Record
-from telicent_lib.sinks import DataSink
+from ianode_lib.sinks.dataSink import DataSink
+from ianode_lib.sinks.kafkaSink import KafkaSink
+from ianode_lib.sinks.serializers import RdfSerializer, SerializerFunction, Serializers
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -20,23 +19,6 @@ limitations under the License.
 """
 
 
-class ListSink(DataSink):
-    """
-    A Data Sink backed by a List intended for test and development purposes only
-    """
-
-    def __init__(self):
-        super().__init__("List")
-        self.data: list[Record] = []
-
-    def send(self, record: Record):
-        if record is None:
-            return
-        self.data.append(record)
-
-    def get(self) -> list[Record]:
-        """Gets the underlying list"""
-        return self.data
-
-    def __str__(self):
-        return "In-Memory List"
+__all__ = [
+    'SerializerFunction', 'Serializers', 'RdfSerializer', 'DataSink', 'KafkaSink'
+]

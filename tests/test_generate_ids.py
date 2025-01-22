@@ -3,10 +3,10 @@ from __future__ import annotations
 from collections.abc import Iterable
 from unittest import TestCase
 
-from telicent_lib import Adapter, AutomaticAdapter, Mapper, Projector, Record
-from telicent_lib.action import Action, InputAction, InputOutputAction, OutputAction
-from telicent_lib.sinks.listSink import ListSink
-from telicent_lib.sources.listSource import ListSource
+from ianode_lib import Adapter, AutomaticAdapter, Mapper, Projector, Record
+from ianode_lib.action import Action, InputAction, InputOutputAction, OutputAction
+from ianode_lib.sinks.listSink import ListSink
+from ianode_lib.sources.listSource import ListSource
 
 
 class ActionTestCase(TestCase):

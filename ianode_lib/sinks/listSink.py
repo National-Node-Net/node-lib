@@ -1,7 +1,7 @@
-from typing import Any
 
-from telicent_lib import Record
-from telicent_lib.sinks import DataSink
+
+from ianode_lib.records import Record
+from ianode_lib.sinks import DataSink
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -20,23 +20,23 @@ limitations under the License.
 """
 
 
-class DictionarySink(DataSink):
+class ListSink(DataSink):
     """
-    A Data Sink backed by a Dictionary intended for test and development purposes only
+    A Data Sink backed by a List intended for test and development purposes only
     """
 
     def __init__(self):
-        super().__init__("Dictionary")
-        self.data: dict[Any, Any] = {}
+        super().__init__("List")
+        self.data: list[Record] = []
 
     def send(self, record: Record):
         if record is None:
             return
-        self.data[record.key] = record.value
+        self.data.append(record)
 
-    def get(self) -> dict[Any, Any]:
-        """Gets the underlying dictionary"""
+    def get(self) -> list[Record]:
+        """Gets the underlying list"""
         return self.data
 
     def __str__(self):
-        return "In-Memory Dictionary"
+        return "In-Memory List"

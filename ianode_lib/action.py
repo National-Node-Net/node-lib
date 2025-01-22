@@ -9,12 +9,12 @@ from colored import colored, fore, style
 from opentelemetry import metrics, trace
 from opentelemetry.metrics import CallbackOptions, Observation
 
-from telicent_lib.errors import PrintErrorHandler, auto_discover_error_handler
-from telicent_lib.records import Record
-from telicent_lib.reporter import Reporter
-from telicent_lib.sinks import DataSink
-from telicent_lib.sources import DataSource
-from telicent_lib.status import Status
+from ianode_lib.errors import PrintErrorHandler, auto_discover_error_handler
+from ianode_lib.records import Record
+from ianode_lib.reporter import Reporter
+from ianode_lib.sinks import DataSink
+from ianode_lib.sources import DataSource
+from ianode_lib.status import Status
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -67,7 +67,7 @@ DEFAULT_REPORTING_BATCH_SIZE: int = 25000
 
 
 class Action:
-    """Represents an action that is executed on the Telicent Core Platform"""
+    """Represents an action that is executed on the IANode Core Platform"""
 
     def __init__(
             self, text_colour: str = fore.LIGHT_GRAY, reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE,
@@ -183,7 +183,7 @@ class Action:
 
     @property
     def telemetry_id(self):
-        return f"telicent_lib.{self.action_type}.{self.generate_id()}"
+        return f"ianode_lib.{self.action_type}.{self.generate_id()}"
 
     def __get_items_processed_rate__(self, options: CallbackOptions) -> Iterable[Observation]:
         total_elapsed = __calculate_elapsed__(self.processed_metric_timer)
@@ -233,7 +233,7 @@ class Action:
 
         self.print_coloured(horizontal_line)
         self.print_coloured(empty_line)
-        self.print_coloured("|" + "TELICENT CORE".center(78) + "|")
+        self.print_coloured("|" + "INTEGRATION ARCHITECTURE NODE".center(78) + "|")
         if self.action_type is not None and len(self.action_type) > 0:
             self.print_coloured("|" + self.action_type.center(78) + "|")
         if self.name is not None and len(self.name) > 0:
@@ -403,7 +403,7 @@ class Action:
             f"Aborted!  Processed {self.counter:,} records in {elapsed:,.2f} seconds at {rate:,.2f} records/seconds")
         if self.reporter is not None:
             self.reporter.stop_heartbeat()
-            self.print_coloured(f"Telicent Live Reporter unregistered from {self.reporter.sink}")
+            self.print_coloured(f"IANode Live Reporter unregistered from {self.reporter.sink}")
 
         if self.error_handler is not None:
             self.error_handler.close()
@@ -442,7 +442,7 @@ class Action:
         if self.reporter is not None:
             self.update_status(Status.COMPLETED)
             self.reporter.stop_heartbeat()
-            self.print_coloured(f"Telicent Live Reporter unregistered from {self.reporter.sink}")
+            self.print_coloured(f"IANode Live Reporter unregistered from {self.reporter.sink}")
 
     def send_error(self, error, error_type, level):
         self.error_count += 1

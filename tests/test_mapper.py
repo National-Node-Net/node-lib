@@ -3,9 +3,9 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-from telicent_lib import Mapper, Record, RecordMapper
-from telicent_lib.sinks.listSink import ListSink
-from telicent_lib.sources.listSource import ListSource
+from ianode_lib import Mapper, Record, RecordMapper
+from ianode_lib.sinks.listSink import ListSink
+from ianode_lib.sources.listSource import ListSource
 from tests.delaySink import DelaySink
 from tests.test_records import RecordVerifier
 
@@ -73,7 +73,7 @@ class TestMapper(RecordVerifier):
             Mapper(source=ListSource(), target=ListSink(), map_function=self.__verify_cubed_keys__, has_reporter=False,
                    has_error_handler=False)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ianode_lib.adapter.uuid.uuid4')
     def test_mapper_01(self, patched_method):
         patched_method.return_value = 'uuid4'
         source = ListSource(self.__generate_records__(10))
@@ -84,7 +84,7 @@ class TestMapper(RecordVerifier):
 
         self.__verify_cubed_keys__(sink, 10, headers=self.default_headers)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ianode_lib.adapter.uuid.uuid4')
     def test_mapper_02(self, patched_method):
         patched_method.return_value = 'uuid4'
         source = ListSource(self.__generate_records__(10))
@@ -106,7 +106,7 @@ class TestMapper(RecordVerifier):
         # Mapping function errors so will produce no outputs
         self.assertEqual(len(sink.get()), 0)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ianode_lib.adapter.uuid.uuid4')
     def test_mapper_04(self, patched_method):
         patched_method.return_value = 'uuid4'
         source = ListSource(self.__generate_records__(10))
@@ -119,7 +119,7 @@ class TestMapper(RecordVerifier):
         self.assertEqual(len(map_func.get()), 10)
         self.assertEqual(map_func.get(), source.list)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ianode_lib.adapter.uuid.uuid4')
     def test_mapper_05(self, patched_method):
         patched_method.return_value = 'uuid4'
         source = ListSource(self.__generate_records__(10))
@@ -132,7 +132,7 @@ class TestMapper(RecordVerifier):
 
         self.__verify_cubed_keys__(sink, 10, headers=self.default_headers)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ianode_lib.adapter.uuid.uuid4')
     def test_mapper_06(self, patched_method):
         patched_method.return_value = 'uuid4'
         records = self.__generate_records__(9)
@@ -148,7 +148,7 @@ class TestMapper(RecordVerifier):
 
         self.__verify_cubed_keys__(sink, 9, headers=self.default_headers)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ianode_lib.adapter.uuid.uuid4')
     def test_mapper_extra_args_01(self, patched_method):
         patched_method.return_value = 'uuid4'
         source = ListSource(self.__generate_records__(10))

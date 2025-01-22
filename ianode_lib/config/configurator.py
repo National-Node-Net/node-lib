@@ -4,7 +4,7 @@ from collections.abc import Callable
 from enum import Enum
 from typing import Any
 
-from telicent_lib.config.configSource import ConfigSource, EnvironmentSource
+from ianode_lib.config.configSource import ConfigSource, EnvironmentSource
 
 __license__ = """
 Copyright (c) Telicent Ltd.

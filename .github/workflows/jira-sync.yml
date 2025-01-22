@@ -11,9 +11,9 @@ on:
 
 jobs:
   sync-to-jira:
-    uses: telicent-oss/shared-workflows/.github/workflows/jira-sync.yml@main
+    uses: NationalDigitalTwin/shared-workflows/.github/workflows/jira-sync.yml@main
     with:
-      jira-url: https://telicent.atlassian.net
+      jira-url: https://ndtp.atlassian.net
       jira-project: TPT
       issue-mapping-file: .github/jira-mapping-rules.yml
     secrets: inherit

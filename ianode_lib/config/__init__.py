@@ -1,5 +1,5 @@
-from telicent_lib.config.configSource import ConfigSource, EnvironmentSource
-from telicent_lib.config.configurator import Configurator, OnError
+from ianode_lib.config.configSource import ConfigSource, EnvironmentSource
+from ianode_lib.config.configurator import Configurator, OnError
 
 __license__ = """
 Copyright (c) Telicent Ltd.

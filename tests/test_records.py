@@ -5,7 +5,7 @@ import unittest
 from collections.abc import Callable, Iterable
 from typing import Any
 
-from telicent_lib import Record, RecordUtils
+from ianode_lib import Record, RecordUtils
 
 
 class RecordVerifier(unittest.TestCase):

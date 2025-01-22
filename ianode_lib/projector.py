@@ -1,11 +1,11 @@
 from colored import fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
-from telicent_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputAction
-from telicent_lib.records import RecordProjector, RecordUtils
-from telicent_lib.sources import DataSource
-from telicent_lib.status import Status
-from telicent_lib.utils import validate_callable_protocol
+from ianode_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputAction
+from ianode_lib.records import RecordProjector, RecordUtils
+from ianode_lib.sources import DataSource
+from ianode_lib.status import Status
+from ianode_lib.utils import validate_callable_protocol
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -96,7 +96,7 @@ class Projector(InputAction):
                             " - will write out to " + self.target_store)
         if self.reporter is not None:
             self.reporter.run()
-            self.print_coloured(f"Telicent Live Reporter registered to send heartbeats to {self.reporter.sink}")
+            self.print_coloured(f"IANode Live Reporter registered to send heartbeats to {self.reporter.sink}")
         with self.source:
             try:
                 self.started()

@@ -1,4 +1,4 @@
-from telicent_lib.datasets.datasets import DCATDataSet, SimpleDataSet
+from ianode_lib.datasets.datasets import DCATDataSet, SimpleDataSet
 
 __license__ = """
 Copyright (c) Telicent Ltd.

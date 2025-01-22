@@ -1,4 +1,4 @@
-from telicent_lib.records import Record
+from ianode_lib.records import Record
 
 __license__ = """
 Copyright (c) Telicent Ltd.

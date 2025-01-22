@@ -8,14 +8,14 @@ from typing import Any
 from colored import fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
-from telicent_lib.action import DEFAULT_REPORTING_BATCH_SIZE, OutputAction
-from telicent_lib.config import Configurator
-from telicent_lib.datasets.datasets import SimpleDataSet
-from telicent_lib.records import Record, RecordAdapter, RecordUtils
-from telicent_lib.sinks import KafkaSink
-from telicent_lib.sinks.dataSink import DataSink
-from telicent_lib.status import Status
-from telicent_lib.utils import validate_callable_protocol
+from ianode_lib.action import DEFAULT_REPORTING_BATCH_SIZE, OutputAction
+from ianode_lib.config import Configurator
+from ianode_lib.datasets.datasets import SimpleDataSet
+from ianode_lib.records import Record, RecordAdapter, RecordUtils
+from ianode_lib.sinks import KafkaSink
+from ianode_lib.sinks.dataSink import DataSink
+from ianode_lib.status import Status
+from ianode_lib.utils import validate_callable_protocol
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -161,7 +161,7 @@ class Adapter(BaseAdapter):
 
         if self.reporter is not None:
             self.reporter.run()
-            self.print_coloured(f"Telicent Live Reporter registered to send heartbeats to {self.reporter.sink}")
+            self.print_coloured(f"IANode Live Reporter registered to send heartbeats to {self.reporter.sink}")
 
         self.started()
 
@@ -260,7 +260,7 @@ class AutomaticAdapter(BaseAdapter):
 
         if self.reporter is not None:
             self.reporter.run()
-            self.print_coloured(f"Telicent Live Reporter registered to send heartbeats to {self.reporter.sink}")
+            self.print_coloured(f"IANode Live Reporter registered to send heartbeats to {self.reporter.sink}")
 
         try:
             self.started()

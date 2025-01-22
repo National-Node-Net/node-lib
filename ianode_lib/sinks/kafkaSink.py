@@ -8,11 +8,11 @@ import warnings
 from confluent_kafka import Producer
 from confluent_kafka.serialization import Serializer
 
-from telicent_lib.config.kafka import kafka_config_factory
-from telicent_lib.records import Record
-from telicent_lib.sinks.dataSink import DataSink
-from telicent_lib.sinks.serializers import SerializerFunction, Serializers
-from telicent_lib.utils import check_kafka_broker_available, validate_callable_protocol
+from ianode_lib.config.kafka import kafka_config_factory
+from ianode_lib.records import Record
+from ianode_lib.sinks.dataSink import DataSink
+from ianode_lib.sinks.serializers import SerializerFunction, Serializers
+from ianode_lib.utils import check_kafka_broker_available, validate_callable_protocol
 
 __license__ = """
 Copyright (c) Telicent Ltd.

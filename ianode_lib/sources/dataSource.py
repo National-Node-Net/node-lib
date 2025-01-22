@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-from telicent_lib.records import Record
+from ianode_lib.records import Record
 
 
 class DataSource:

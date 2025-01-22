@@ -1,25 +1,25 @@
 # Deployment
 
-This guide is intended to provide information about deploying telicent-lib actions.
+This guide is intended to provide information about deploying ianode-lib actions.
 
 ## Configuring Kafka in a live environment
 
-telicent-lib has a dependency on [confluent-kafka](https://github.com/confluentinc/confluent-kafka-python/), which is a wrapper around [librdkafka](https://github.com/confluentinc/librdkafka/). 
+ianode-lib has a dependency on [confluent-kafka](https://github.com/confluentinc/confluent-kafka-python/), which is a wrapper around [librdkafka](https://github.com/confluentinc/librdkafka/). 
   
  * [confluent-kafka configuration guide](https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html#pythonclient-configuration)
  * [librdkafka configuration reference](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md)
 
-telicent-lib considers the configuration of librdkafka to be separate from the configuration of data or actions, and it
+ianode-lib considers the configuration of librdkafka to be separate from the configuration of data or actions, and it
 is preferable to leave the specifics of configuring librdkafka to those managing the environments in which actions are 
 deployed.
 
-To provide a configuration file for librdkafka to telicent-lib, two configuration variables must be set for telcient-lib.
+To provide a configuration file for librdkafka to ianode-lib, two configuration variables must be set for telcient-lib.
 
  * `KAFKA_CONFIG_MODE`: toml
  * `KAFKA_CONFIG_FILE_PATH`: path to the configuration file
 
 **WARNING**: it is strongly recommended that librdkafka properties `auto.offset.reset` and `enable.auto.commit` never be set 
-through configuration. telicent-lib will manage these properties itself.
+through configuration. ianode-lib will manage these properties itself.
 
 ### Creating a configuration file
 

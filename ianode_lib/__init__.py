@@ -1,6 +1,8 @@
-from telicent_lib.sinks.dataSink import DataSink
-from telicent_lib.sinks.kafkaSink import KafkaSink
-from telicent_lib.sinks.serializers import RdfSerializer, SerializerFunction, Serializers
+from ianode_lib.adapter import Adapter, AutomaticAdapter
+from ianode_lib.datasets import DCATDataSet, SimpleDataSet
+from ianode_lib.mapper import Mapper
+from ianode_lib.projector import Projector
+from ianode_lib.records import Record, RecordAdapter, RecordMapper, RecordProjector, RecordUtils
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -20,5 +22,15 @@ limitations under the License.
 
 
 __all__ = [
-    'SerializerFunction', 'Serializers', 'RdfSerializer', 'DataSink', 'KafkaSink'
+    'Adapter',
+    'AutomaticAdapter',
+    'DCATDataSet',
+    'Mapper',
+    'Projector',
+    'Record',
+    'RecordMapper',
+    'RecordProjector',
+    'RecordAdapter',
+    'RecordUtils',
+    'SimpleDataSet',
 ]

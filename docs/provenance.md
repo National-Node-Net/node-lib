@@ -2,7 +2,7 @@
 
 ## Heartbeats
 
-When a telicent-lib component is run, by default, it will automatically send a regular heartbeat messages to the provenance topic
+When a ianode-lib component is run, by default, it will automatically send a regular heartbeat messages to the provenance topic
 using a `KafkaSink`.
 
 The provenance topic can be specified with the environment variable `HEART_BEAT_PROVENANCE_TOPIC`. By default, heartbeats are 
@@ -46,7 +46,7 @@ Heartbeats are sent at a specified interval, by default every 15 seconds. This f
 ### Disable the Reporter
 
 ```python
-from telicent_lib.mapper import Mapper
+from ianode_lib.mapper import Mapper
 
 mapper = Mapper(
     source=my_source, target=my_sink, map_function=map_func, has_reporter=False
@@ -57,8 +57,8 @@ mapper.run()
 ### Manually set the Reporter's sink
 
 ```python
-from telicent_lib.mapper import Mapper
-from telicent_lib.sinks.listSink import ListSink
+from ianode_lib.mapper import Mapper
+from ianode_lib.sinks.listSink import ListSink
 
 reporter_sink = ListSink()
 mapper = Mapper(
@@ -70,7 +70,7 @@ mapper.run()
 ### Changing the Reporting Frequency
 
 ```python
-from telicent_lib.mapper import Mapper
+from ianode_lib.mapper import Mapper
 
 mapper = Mapper(
     source=my_source, target=my_sink, map_function=map_func
@@ -82,7 +82,7 @@ mapper.run()
 
 ## Audit Headers
 
-telicent-lib automatically applies headers to each record written by an adapter or a mapper. These records provide an audit that gives
+ianode-lib automatically applies headers to each record written by an adapter or a mapper. These records provide an audit that gives
 each record a unique ID, which component wrote the record, and in the case of a mapper, the unique ID of the source record.
 
 | Header             | Usage                                                                                                                            |
@@ -102,8 +102,8 @@ By default, [Adapters and AutomaticAdapters](adapters.md) provide a method to no
 
 ```python
 ...
-from telicent_lib import Adapter, SimpleDataSet
-from telicent_lib.adapter import KafkaSink
+from ianode_lib import Adapter, SimpleDataSet
+from ianode_lib.adapter import KafkaSink
 sink = KafkaSink(topic="raw-in")
 dataset = SimpleDataSet(dataset_id="my-id", title="My Adapter", source_mime_type='text/csv')
 adapter = Adapter(target=sink, dataset=dataset)
@@ -114,8 +114,8 @@ The above will create a message on a topic (default: "catalog") with the followi
 
 ```json
 {
-	"id": "telicent_lib.adapter",
-	"title": "telicent_lib.adapter",
+	"id": "ianode_lib.adapter",
+	"title": "ianode_lib.adapter",
 	"source_mime_type": "unknown"
 }
 ```
@@ -135,8 +135,8 @@ adapter.register_data_catalog()
 
 ```json
 {
-	"id": "telicent_lib.adapter",
-	"title": "telicent_lib.adapter",
+	"id": "ianode_lib.adapter",
+	"title": "ianode_lib.adapter",
 	"source_mime_type": "unknown",
     "author":  "John Doe"
 }
@@ -145,8 +145,8 @@ adapter.register_data_catalog()
 ### Updating a Dataset
 
 ```python
-from telicent_lib import Adapter, SimpleDataSet
-from telicent_lib.adapter import KafkaSink
+from ianode_lib import Adapter, SimpleDataSet
+from ianode_lib.adapter import KafkaSink
 sink = KafkaSink(topic="raw-in")
 dataset = SimpleDataSet(dataset_id="my-id", title="My Adapter", source_mime_type='text/csv')
 adapter = Adapter(target=sink, name="Adapter", dataset=dataset)
@@ -197,7 +197,7 @@ adapter = Adapter(target=sink, name="Adapter", data_catalog_sink=dc_sink)
 Headers may be provided to the `update_data_catalog` and `register_data_catalog` methods.
 
 ```python
-from telicent_lib import RecordUtils
+from ianode_lib import RecordUtils
 headers = {"header-key": "header value"}
 adapter.register_data_catalog(headers=RecordUtils.to_headers(headers))
 adapter.update_data_catalog(headers=RecordUtils.to_headers(headers))
@@ -206,7 +206,7 @@ adapter.update_data_catalog(headers=RecordUtils.to_headers(headers))
 
 ### DCATDataSet
 
-telicent-lib also provides a `DCATDataSet` class. It can be used in the same way as `SimpleDataSet`, but its output
+ianode-lib also provides a `DCATDataSet` class. It can be used in the same way as `SimpleDataSet`, but its output
 is RDF Turtle instead of JSON. `DCATDataSet` also requires certain keys be present in `registration_fields`.
 
 - description
@@ -221,7 +221,7 @@ is RDF Turtle instead of JSON. `DCATDataSet` also requires certain keys be prese
 - distribution_id
 
 ```python
-from telicent_lib import DCATDataSet
+from ianode_lib import DCATDataSet
 
 dataset = DCATDataSet(dataset_id='my-data-set', title='myfile.csv', source_mime_type='text/csv')
 adapter = AutomaticAdapter(target=sink, dataset=dataset)
@@ -247,7 +247,7 @@ Produces the following turtle:
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix schema: <https://schema.org/> .
-@prefix tcat: <http://telicent.io/catalog#> .
+@prefix tcat: <http://ndtp.co.uk/catalog#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 tcat:my-data-set_dataset a dcat:Dataset ;
@@ -273,7 +273,7 @@ tcat:my-data-set_distribution a dcat:Distribution ;
 ```
 
 ```python
-from telicent_lib import DCATDataSet
+from ianode_lib import DCATDataSet
 
 dataset = DCATDataSet(dataset_id='my-data-set', title='myfile.csv', source_mime_type='text/csv')
 adapter = AutomaticAdapter(target=sink, dataset=dataset)
@@ -285,7 +285,7 @@ Produces the following turtle:
 ```
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix tcat: <http://telicent.io/catalog#> .
+@prefix tcat: <http://ndtp.co.uk/catalog#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 tcat:my-data-set_dataset a dcat:Dataset ;

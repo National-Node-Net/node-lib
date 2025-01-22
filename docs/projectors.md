@@ -1,6 +1,6 @@
 # Projectors
 
-A `Projector` is an action used to project data already within Telicent Core out into another data store, typically one
+A `Projector` is an action used to project data already within Integration Architecture Node out into another data store, typically one
 of our Smart Caches, for later consumption by applications.  A `Projector` is an automatic action meaning that you only
 need create it with the desired [`DataSource`](data-sources.md) and projection function, before
 calling `run()` to run the projection process for you.
@@ -11,7 +11,7 @@ A mapping function conforms to the [`RecordProjector`](records.md#working-with-r
 have the following signature:
 
 ```python
-from telicent_lib import Record
+from ianode_lib import Record
 
 def example_projection_function(record: Record) -> None:
     pass
@@ -26,8 +26,8 @@ In this example we use the a [`DictionarySource`](data-sources.md#dictionary-sou
 have a projection function that simply prints out the records:
 
 ```python
-from telicent_lib import Projector, Record
-from telicent_lib.sources.dictSource import DictionarySource
+from ianode_lib import Projector, Record
+from ianode_lib.sources.dictSource import DictionarySource
 
 def print_records(record: Record) -> None:
     print(record)

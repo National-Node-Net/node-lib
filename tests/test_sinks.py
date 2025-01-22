@@ -2,7 +2,7 @@ import unittest
 
 from confluent_kafka import KafkaException
 
-from telicent_lib.sinks import KafkaSink
+from ianode_lib.sinks import KafkaSink
 
 
 class TestSources(unittest.TestCase):

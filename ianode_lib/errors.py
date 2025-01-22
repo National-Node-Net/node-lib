@@ -7,9 +7,9 @@ from enum import Enum
 
 import pytz
 
-from telicent_lib.config import Configurator
-from telicent_lib.records import Record, RecordUtils
-from telicent_lib.sinks import KafkaSink
+from ianode_lib.config import Configurator
+from ianode_lib.records import Record, RecordUtils
+from ianode_lib.sinks import KafkaSink
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -36,7 +36,7 @@ class ErrorLevel(Enum):
 
 def auto_discover_error_handler():
     config = Configurator()
-    error_handler = config.get("ERROR_HANDLER_CLASS", "telicent_lib.errors.KafkaErrorHandler")
+    error_handler = config.get("ERROR_HANDLER_CLASS", "idanode_lib.errors.KafkaErrorHandler")
     my_module, my_class = error_handler.rsplit('.', 1)
     module = importlib.import_module(my_module)
     return getattr(module, my_class)

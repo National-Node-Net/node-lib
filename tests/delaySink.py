@@ -1,7 +1,7 @@
 import threading
 
-from telicent_lib import Record
-from telicent_lib.sinks.listSink import ListSink
+from ianode_lib import Record
+from ianode_lib.sinks.listSink import ListSink
 
 
 class DelaySink(ListSink):

@@ -12,11 +12,11 @@ from threading import Thread
 
 import pytz
 
-from telicent_lib.config import Configurator
-from telicent_lib.records import Record
-from telicent_lib.sinks.dataSink import DataSink
-from telicent_lib.sinks.kafkaSink import KafkaSink
-from telicent_lib.status import Status
+from ianode_lib.config import Configurator
+from ianode_lib.records import Record
+from ianode_lib.sinks.dataSink import DataSink
+from ianode_lib.sinks.kafkaSink import KafkaSink
+from ianode_lib.status import Status
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 
 class Reporter:
     """
-    A reporter is an internal actions that reports to Telicent CORE the status of the component.
+    A reporter is an internal actions that reports to Integration Architecture Node the status of the component.
 
     A reporters main responsibility is to register components to the CORE and provide a heartbeat for reporting.
     """

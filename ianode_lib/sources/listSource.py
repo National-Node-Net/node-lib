@@ -1,8 +1,8 @@
 
 from collections.abc import Iterable
 
-from telicent_lib.records import Record
-from telicent_lib.sources.dataSource import DataSource
+from ianode_lib.records import Record
+from ianode_lib.sources.dataSource import DataSource
 
 
 class ListSource(DataSource):

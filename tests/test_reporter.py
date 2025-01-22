@@ -2,9 +2,9 @@ import json
 import time
 import unittest
 
-from telicent_lib.reporter import Reporter
-from telicent_lib.sinks.listSink import ListSink
-from telicent_lib.status import Status
+from ianode_lib.reporter import Reporter
+from ianode_lib.sinks.listSink import ListSink
+from ianode_lib.status import Status
 from tests.test_records import RecordVerifier
 
 

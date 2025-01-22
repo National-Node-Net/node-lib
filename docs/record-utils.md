@@ -34,7 +34,7 @@ existing_headers)` method is provided to support.  This can take just a dictiona
 headers, or it can take a dictionary and a list of existing headers allowing combining new headers with existing ones.
 
 ```python
-from telicent_lib import Record, RecordUtils
+from ianode_lib import Record, RecordUtils
 
 # Create a new Record using to_headers() to convert from dictionary to list of tuples for our headers
 record = Record(RecordUtils.to_headers({"Content-Type": "application/turtle",

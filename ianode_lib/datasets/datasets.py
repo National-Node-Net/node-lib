@@ -7,7 +7,7 @@ from datetime import datetime
 
 from rdflib import DCAT, DCTERMS, PROV, RDF, SDO, XSD, BNode, Graph, Literal, URIRef
 
-from telicent_lib.records import Record
+from ianode_lib.records import Record
 
 
 class DataSetFieldError(Exception):
@@ -39,7 +39,7 @@ class DCATDataSet(DataSet):
 
     def __init__(self, dataset_id: str, title: str, source_mime_type: str):
         super().__init__(dataset_id, title, source_mime_type)
-        self.tcat = 'http://telicent.io/catalog#'
+        self.tcat = 'http://ndtp.co.uk/catalog#'
         self.dataset_id_dataset = URIRef(f'{self.tcat}{self.dataset_id}_dataset')
         self.dataset_id_distribution = URIRef(f'{self.tcat}{self.dataset_id}_distribution')
 

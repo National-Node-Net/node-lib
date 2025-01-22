@@ -13,7 +13,7 @@ fields:
 A record is created by simple instantiating an instance of the tuple e.g.
 
 ```python
-from telicent_lib import Record
+from ianode_lib import Record
 
 record = Record([("Content-Type", b"example")], 12345, "Some value", None)
 ```
@@ -21,13 +21,13 @@ record = Record([("Content-Type", b"example")], 12345, "Some value", None)
 In the above example we create a record that has some headers, the key `12345` and the value `Some value`.  Note that we
 encoded the header value into bytes in the example.  Our APIs for [manipulating headers](#manipulating-record-headers)
 work with header values as `str` but these are generally stored as `bytes` by underlying [Data Sources](data-sources.md)
-and [Data Sinks](data-sinks.md).  From a user perspective you can work with `str` values for convenience and telicent-lib
+and [Data Sinks](data-sinks.md).  From a user perspective you can work with `str` values for convenience and ianode-lib
 takes care of converting to/from `bytes` for you.
 
 Since `Record` is a named tuple you can use named parameters for clarity e.g.
 
 ```python
-from telicent_lib import Record
+from ianode_lib import Record
 
 record = Record(headers=None, key=789, value="Value")
 ```
@@ -50,7 +50,7 @@ Typically, you work with records when implementing a function to pass to an acti
 where you define your function in terms of the `Record` type. For example consider the following map function:
 
 ```python
-from telicent_lib import Record
+from ianode_lib import Record
 
 
 def to_upper(record: Record) -> Record | list[Record] | None:
@@ -82,7 +82,7 @@ only exception to this is that functions may take keyword arguments as their fin
 rewrite our earlier example like so:
 
 ```python
-from telicent_lib import Record
+from ianode_lib import Record
 
 
 def to_upper(record: Record, **kwargs) -> Record | list[Record] | None:

@@ -8,12 +8,12 @@ from collections.abc import Iterable
 from confluent_kafka import OFFSET_BEGINNING, OFFSET_END, Consumer, Message, TopicPartition
 from confluent_kafka.serialization import Deserializer
 
-from telicent_lib.config.kafka import kafka_config_factory
-from telicent_lib.exceptions import SourceNotFoundException
-from telicent_lib.records import Record
-from telicent_lib.sources.dataSource import DataSource
-from telicent_lib.sources.deserializers import DeserializerFunction, Deserializers
-from telicent_lib.utils import check_kafka_broker_available, generate_group_id, validate_callable_protocol
+from ianode_lib.config.kafka import kafka_config_factory
+from ianode_lib.exceptions import SourceNotFoundException
+from ianode_lib.records import Record
+from ianode_lib.sources.dataSource import DataSource
+from ianode_lib.sources.deserializers import DeserializerFunction, Deserializers
+from ianode_lib.utils import check_kafka_broker_available, generate_group_id, validate_callable_protocol
 
 logger = logging.getLogger(__name__)
 
