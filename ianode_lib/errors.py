@@ -36,7 +36,7 @@ class ErrorLevel(Enum):
 
 def auto_discover_error_handler():
     config = Configurator()
-    error_handler = config.get("ERROR_HANDLER_CLASS", "idanode_lib.errors.KafkaErrorHandler")
+    error_handler = config.get("ERROR_HANDLER_CLASS", "ianode_lib.errors.KafkaErrorHandler")
     my_module, my_class = error_handler.rsplit('.', 1)
     module = importlib.import_module(my_module)
     return getattr(module, my_class)
