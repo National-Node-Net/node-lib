@@ -1,12 +1,12 @@
 # Actions
 
-Actions represent components of the Telicent Core platform that do some form of data processing, they provide automation
+Actions represent components of the Integration Architecture Node platform that do some form of data processing, they provide automation
 and progress monitoring of the action. Currently, there are three kinds of actions defined:
 
-- An [`Adapter/AutomaticAdapter`](adapters.md) for importing data into Telicent Core e.g. from legacy systems.
-- A [`Mapper`](mappers.md) for performing data transformations within Telicent Core e.g. cleaning, augmenting and
+- An [`Adapter/AutomaticAdapter`](adapters.md) for importing data into Integration Architecture Node e.g. from legacy systems.
+- A [`Mapper`](mappers.md) for performing data transformations within Integration Architecture Node e.g. cleaning, augmenting and
   transforming data.
-- A [`Projector`](projectors.md) for exporting data from Telicent Core e.g. into a Smart Cache.
+- A [`Projector`](projectors.md) for exporting data from Integration Architecture Node e.g. into a Secure Agent.
 
 ## Automation
 
@@ -43,7 +43,7 @@ When an action runs it displays a Startup banner e.g.
 ```text
 --------------------------------------------------------------------------------
 |                                                                              |
-|                                TELICENT CORE                                 |
+|                         Integration Architecture Node                        |
 |                                  Projector                                   |
 |                                Example Action                                |
 |                                                                              |
@@ -57,7 +57,7 @@ on the action in question e.g.
 ```text
 --------------------------------------------------------------------------------
 |                                                                              |
-|                                TELICENT CORE                                 |
+|                         Integration Architecture Node                        |
 |                                    Mapper                                    |
 |                            Uppercase Transformer                             |
 |                                                                              |

@@ -4,8 +4,8 @@ from collections.abc import Iterable
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from telicent_lib import Adapter, AutomaticAdapter, Record, RecordUtils, SimpleDataSet
-from telicent_lib.sinks.listSink import ListSink
+from ia_map_lib import Adapter, AutomaticAdapter, Record, RecordUtils, SimpleDataSet
+from ia_map_lib.sinks.listSink import ListSink
 from tests.delaySink import DelaySink
 from tests.test_records import RecordVerifier
 
@@ -46,7 +46,7 @@ class TestAdapter(RecordVerifier):
             ('Exec-Path', b'Automatic Adapter-to-In-Memory List'),
             ('Request-Id', b'List:uuid4'),
             ('traceparent', b''),
-            ('Data-Source-Name', b'telicent_lib.adapter'),
+            ('Data-Source-Name', b'ia_map_lib.adapter'),
             ('Data-Source-Type', b'unknown')
         ]
 
@@ -198,7 +198,7 @@ class TestAdapter(RecordVerifier):
         adapter.run()
         self.assertEqual(len(sink.get()), 10)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ia_map_lib.adapter.uuid.uuid4')
     def test_automatic_adapter_with_args_01(self, patched_method):
         patched_method.return_value = 'uuid4'
         sink = ListSink()
@@ -207,7 +207,7 @@ class TestAdapter(RecordVerifier):
         adapter.run()
         self.__validate_generated_range__(sink, 100, 200, headers=self.default_headers)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ia_map_lib.adapter.uuid.uuid4')
     def test_automatic_adapter_with_args_02(self, patched_method):
         patched_method.return_value = 'uuid4'
         sink = DelaySink()
@@ -218,7 +218,7 @@ class TestAdapter(RecordVerifier):
             adapter.run()
         self.__validate_generated_range__(sink, 50, 70, headers=self.default_headers)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ia_map_lib.adapter.uuid.uuid4')
     def test_automatic_adapter_with_empty_source_headers(self, patched_method):
         patched_method.return_value = 'uuid4'
         sink = ListSink()
@@ -227,7 +227,7 @@ class TestAdapter(RecordVerifier):
         adapter.run()
         self.__validate_generated_range__(sink, 100, 200, headers=self.default_headers)
 
-    @patch('telicent_lib.adapter.uuid.uuid4')
+    @patch('ia_map_lib.adapter.uuid.uuid4')
     def test_automatic_adapter_with_source_headers(self, patched_method):
         patched_method.return_value = 'uuid4'
         sink = ListSink()

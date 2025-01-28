@@ -2,8 +2,8 @@ import logging
 import unittest
 from unittest import mock
 
-from telicent_lib.exceptions import ConfigurationException
-from telicent_lib.middleware.decode_token import AccessMiddleware
+from ia_map_lib.exceptions import ConfigurationException
+from ia_map_lib.middleware.decode_token import AccessMiddleware
 
 
 class DecodeTokenTestCase(unittest.TestCase):
@@ -19,7 +19,7 @@ class DecodeTokenTestCase(unittest.TestCase):
                               logger=logging.LoggerAdapter(logging.getLogger(), extra={}))
         self.assertEqual(mw.public_key_url, 'https://example.com')
 
-    @mock.patch('telicent_lib.middleware.decode_token.jwt')
+    @mock.patch('ia_map_lib.middleware.decode_token.jwt')
     def test_validate_jwks_token(self, mock_jwt):
         mock_jwt.get_unverified_header.return_value = {'alg': 'abc'}
         mock_jwt.PyJWKClient.return_value.get_signing_key_from_jwt.return_value = mock.Mock()
@@ -34,8 +34,8 @@ class DecodeTokenTestCase(unittest.TestCase):
             '123456', mock_jwt.PyJWKClient.return_value.get_signing_key_from_jwt().key, algorithms=['abc']
         )
 
-    @mock.patch('telicent_lib.middleware.decode_token.requests')
-    @mock.patch('telicent_lib.middleware.decode_token.jwt')
+    @mock.patch('ia_map_lib.middleware.decode_token.requests')
+    @mock.patch('ia_map_lib.middleware.decode_token.jwt')
     def test_validate_public_key_token(self, mock_jwt, mock_requests):
         mock_jwt.get_unverified_header.return_value = {'kid': 'abc', 'alg': 'def'}
         mock_requests.get.return_value = mock.Mock()

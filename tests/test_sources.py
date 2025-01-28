@@ -2,7 +2,7 @@ import unittest
 
 from confluent_kafka import KafkaException
 
-from telicent_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 
 class TestSources(unittest.TestCase):
