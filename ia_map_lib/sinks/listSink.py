@@ -1,5 +1,7 @@
-from ianode_lib.config.configSource import ConfigSource, EnvironmentSource
-from ianode_lib.config.configurator import Configurator, OnError
+
+
+from ia_map_lib.records import Record
+from ia_map_lib.sinks import DataSink
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -18,4 +20,23 @@ limitations under the License.
 """
 
 
-__all__ = ['Configurator', 'OnError', 'ConfigSource', 'EnvironmentSource']
+class ListSink(DataSink):
+    """
+    A Data Sink backed by a List intended for test and development purposes only
+    """
+
+    def __init__(self):
+        super().__init__("List")
+        self.data: list[Record] = []
+
+    def send(self, record: Record):
+        if record is None:
+            return
+        self.data.append(record)
+
+    def get(self) -> list[Record]:
+        """Gets the underlying list"""
+        return self.data
+
+    def __str__(self):
+        return "In-Memory List"

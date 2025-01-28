@@ -4,13 +4,13 @@ import uuid
 from colored import fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
-from ianode_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputOutputAction
-from ianode_lib.config.configurator import Configurator
-from ianode_lib.records import RecordMapper, RecordUtils
-from ianode_lib.sinks import DataSink
-from ianode_lib.sources import DataSource
-from ianode_lib.status import Status
-from ianode_lib.utils import validate_callable_protocol
+from ia_map_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputOutputAction
+from ia_map_lib.config.configurator import Configurator
+from ia_map_lib.records import RecordMapper, RecordUtils
+from ia_map_lib.sinks import DataSink
+from ia_map_lib.sources import DataSource
+from ia_map_lib.status import Status
+from ia_map_lib.utils import validate_callable_protocol
 
 __license__ = """
 Copyright (c) Telicent Ltd.

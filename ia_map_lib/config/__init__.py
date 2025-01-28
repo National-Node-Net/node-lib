@@ -1,8 +1,5 @@
-from ianode_lib.adapter import Adapter, AutomaticAdapter
-from ianode_lib.datasets import DCATDataSet, SimpleDataSet
-from ianode_lib.mapper import Mapper
-from ianode_lib.projector import Projector
-from ianode_lib.records import Record, RecordAdapter, RecordMapper, RecordProjector, RecordUtils
+from ia_map_lib.config.configSource import ConfigSource, EnvironmentSource
+from ia_map_lib.config.configurator import Configurator, OnError
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -21,16 +18,4 @@ limitations under the License.
 """
 
 
-__all__ = [
-    'Adapter',
-    'AutomaticAdapter',
-    'DCATDataSet',
-    'Mapper',
-    'Projector',
-    'Record',
-    'RecordMapper',
-    'RecordProjector',
-    'RecordAdapter',
-    'RecordUtils',
-    'SimpleDataSet',
-]
+__all__ = ['Configurator', 'OnError', 'ConfigSource', 'EnvironmentSource']

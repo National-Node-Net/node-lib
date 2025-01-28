@@ -1,6 +1,6 @@
 # OpenTelemetry
 
-ianode-lib provides metrics and traces that can be collected through OpenTelemetry.
+ia-map-lib provides metrics and traces that can be collected through OpenTelemetry.
 
 Users can collect the data using automatic instrumentation, or in more complex use-cases, through specifying 
 manual instrumentation.
@@ -22,13 +22,13 @@ For more information about implementing OpenTelemetry instrumentation in applica
 
 ### Counts for Adapters and Projectors
 
-ianode-lib will automatically count read, processed, and output records, but there are some situations where the decision 
-made by an action cannot be captured automatically by ianode-lib.
+ia-map-lib will automatically count read, processed, and output records, but there are some situations where the decision 
+made by an action cannot be captured automatically by ia-map-lib.
 
-* ianode-lib cannot automatically count when an adapter has read a record or processed a record that it then discards. 
-* ianode-lib cannot automatically determine if a projector output a record or not.
+* ia-map-lib cannot automatically count when an adapter has read a record or processed a record that it then discards. 
+* ia-map-lib cannot automatically determine if a projector output a record or not.
 
-A user must therefore tell ianode-lib when one of these events occur.
+A user must therefore tell ia-map-lib when one of these events occur.
 ```python
 def adapter_function() -> Record:
  
@@ -50,7 +50,7 @@ def projector_function(record: Record) -> None:
 
 ## Tracing
 
-Tracing of records through multiple actions is achieved by ianode-lib automatically injecting a `traceparent` 
+Tracing of records through multiple actions is achieved by ia-map-lib automatically injecting a `traceparent` 
 string in to the headers of each message written to Kafka.
 
 The next action to read the record then continues the trace and injects its own unique id ready for the next action to continue.  

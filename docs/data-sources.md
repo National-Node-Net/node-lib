@@ -20,7 +20,7 @@ ensure that `close()` is called. This is actually what automatic actions do inte
 For example, you might use a source as follows:
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 with KafkaSource(topic="input-topic") as source:
     for i, record in enumerate(source.data):
@@ -34,7 +34,7 @@ Bear in mind that typically a `DataSource` is not used directly but is consumed 
 ## Kafka Source
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 source = KafkaSource(topic="input-topic")
 ```
@@ -57,7 +57,7 @@ variable. The latter is advised to prevent repetitively specifying the broker fo
 For more complex deployments with custom Kafka configurations, please see the [deployment notes](deployment.md).
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 kafka_config = {
   'bootstrap.servers': 'localhost:1234'
@@ -97,7 +97,7 @@ in this case and handling those values in your code e.g.
 
 ```python
 from typing import Any
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 
 def int_from_bytes(data: bytes | None) -> Any:
@@ -139,7 +139,7 @@ Attempting to use a deserializer value that is not a `Deserializer` instance, an
 #### Built-In Deserializer Functions
 
 There are some built-in deserializer functions provided for simple use cases, these can be imported by doing
-a `from ianode_lib.sources import Deserializers` and referring to one of the static methods:
+a `from ia_map_lib.sources import Deserializers` and referring to one of the static methods:
 
 - `Deserializers.unzip_to_string` - Deserializes from zlib compressed UTF-8 bytes into a `str`
 - `Deserializers.binary_to_string` - Deserializes from UTF-8 bytes into a `str`. This is the default deserializer
@@ -176,7 +176,7 @@ positions and potentially miss reading some records. Therefore, it is **strongly
 `group.id` parameter explicitly, especially if your script uses multiple `KafkaSource` instances.
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 kafka_config = {
   'group.id': 'my-app',
@@ -206,7 +206,7 @@ So in practise this reset mode basically acts as read only records from the firs
 used e.g.
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 kafka_config = {
   'group.id': 'latest-app',
@@ -222,7 +222,7 @@ the earliest available offsets in each topic. This effectively forces a full re-
 topic e.g.
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 kafka_config = {
   'group.id': 'beginning-app',
@@ -240,7 +240,7 @@ the latest available offsets in each topic. This means that it will only read re
 application was started e.g.
 
 ```python
-from ianode_lib.sources import KafkaSource
+from ia_map_lib.sources import KafkaSource
 
 kafka_config = {
   'group.id': 'end-app',
@@ -266,7 +266,7 @@ The `DictionarySource` is intended for development and testing only. It is creat
 desired key value pairs in it, these will be converted into `Record` tuples when the source is iterated over:
 
 ```python
-from ianode_lib.sources.dictSource import DictionarySource
+from ia_map_lib.sources.dictSource import DictionarySource
 
 source = DictionarySource(dict([(0, "ant"), (1, "aardvark"), (2, "bat"), (3, "camel")]))
 

@@ -1,7 +1,4 @@
-
-
-from ianode_lib.records import Record
-from ianode_lib.sinks import DataSink
+from ia_map_lib.datasets.datasets import DCATDataSet, SimpleDataSet
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -20,23 +17,7 @@ limitations under the License.
 """
 
 
-class ListSink(DataSink):
-    """
-    A Data Sink backed by a List intended for test and development purposes only
-    """
-
-    def __init__(self):
-        super().__init__("List")
-        self.data: list[Record] = []
-
-    def send(self, record: Record):
-        if record is None:
-            return
-        self.data.append(record)
-
-    def get(self) -> list[Record]:
-        """Gets the underlying list"""
-        return self.data
-
-    def __str__(self):
-        return "In-Memory List"
+__all__ = [
+    'DCATDataSet',
+    'SimpleDataSet',
+]

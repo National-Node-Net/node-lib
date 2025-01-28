@@ -11,7 +11,7 @@ A mapping function conforms to the [`RecordProjector`](records.md#working-with-r
 have the following signature:
 
 ```python
-from ianode_lib import Record
+from ia_map_lib import Record
 
 def example_projection_function(record: Record) -> None:
     pass
@@ -26,8 +26,8 @@ In this example we use the a [`DictionarySource`](data-sources.md#dictionary-sou
 have a projection function that simply prints out the records:
 
 ```python
-from ianode_lib import Projector, Record
-from ianode_lib.sources.dictSource import DictionarySource
+from ia_map_lib import Projector, Record
+from ia_map_lib.sources.dictSource import DictionarySource
 
 def print_records(record: Record) -> None:
     print(record)

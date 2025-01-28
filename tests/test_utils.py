@@ -1,36 +1,36 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from ianode_lib.utils import clean_hostname, generate_group_id
+from ia_map_lib.utils import clean_hostname, generate_group_id
 
 from .test_data.utils_test_hosts import host_data
 
 
 class TestGenerateGroupID(unittest.TestCase):
 
-    @patch('ianode_lib.utils.os.environ', {})
+    @patch('ia_map_lib.utils.os.environ', {})
     def test_clean_hostname_non_k8s(self):
 
         for hostname, expected in zip(host_data["hosts"], host_data["expected_hosts"]):
             result = clean_hostname(hostname)
             self.assertEqual(result, expected, f"Failed for hostname: {hostname} in non-K8s environment")
 
-    @patch('ianode_lib.utils.os.environ', {})
+    @patch('ia_map_lib.utils.os.environ', {})
     def test_clean_hostname_max_len(self):
 
         hostname = 'x' * 300
         result = clean_hostname(hostname)
         self.assertEqual(len(result), 200, f"Failed for hostname: {hostname} in non-K8s environment")
 
-    @patch.dict('ianode_lib.utils.os.environ', {"KUBERNETES_SERVICE_HOST": "some_value"})
+    @patch.dict('ia_map_lib.utils.os.environ', {"KUBERNETES_SERVICE_HOST": "some_value"})
     def test_clean_hostname_k8s(self):
         for hostname, expected in zip(host_data["k8s_hosts"], host_data["k8s_expected_hosts"]):
             result = clean_hostname(hostname)
             self.assertEqual(result, expected, f"Failed for hostname: {hostname} in K8s environment")
 
 
-    @patch('ianode_lib.utils.socket.gethostname')
-    @patch('ianode_lib.utils.inspect.stack')
+    @patch('ia_map_lib.utils.socket.gethostname')
+    @patch('ia_map_lib.utils.inspect.stack')
     def test_generate_group_id_with_predefined_hosts(self, mock_stack, mock_gethostname):
         mock_frame = MagicMock()
         mock_frame.filename = "test_filename"
@@ -51,8 +51,8 @@ class TestGenerateGroupID(unittest.TestCase):
 
             self.assertEqual(group_id, expected_group_id)
 
-    @patch('ianode_lib.utils.socket.gethostname')
-    @patch('ianode_lib.utils.inspect.stack')
+    @patch('ia_map_lib.utils.socket.gethostname')
+    @patch('ia_map_lib.utils.inspect.stack')
     def test_generate_group_id_with_predefined_hosts_should_fail(self, mock_stack, mock_gethostname):
         mock_frame = MagicMock()
         mock_frame.filename = "test_filename"

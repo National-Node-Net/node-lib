@@ -1,6 +1,6 @@
 # Logging
 
-ianode-lib provides a flexible handler, formatter, and Adapter that integrates with Python's standard logging features giving users a fine-grained control to log messages from their applications to core.
+ia-map-lib provides a flexible handler, formatter, and Adapter that integrates with Python's standard logging features giving users a fine-grained control to log messages from their applications to core.
 
 For users who want an efficient way to send logs from their applications to Kafka, a factory is provided to initialise a logger with defaults that can be overriden on-demand.
 
@@ -8,16 +8,16 @@ For users who want an efficient way to send logs from their applications to Kafk
 
 ## Python Logging Primer
 
-Python's standard library provides flexible logging tools that can be extended to a wide range of use cases. Most users will be familiar with sending formatted log strings to either plain-text files or STDOUT, however, ianode-lib's users will likely gain more benefit from sending log entries to a Kafka topic. This is the intention behind ianode-lib's logging extensions.
+Python's standard library provides flexible logging tools that can be extended to a wide range of use cases. Most users will be familiar with sending formatted log strings to either plain-text files or STDOUT, however, ia-map-lib's users will likely gain more benefit from sending log entries to a Kafka topic. This is the intention behind ia-map-lib's logging extensions.
 
-Whilst ianode-lib's logging extensions have been designed to be intuitive and provide out-of-the-box functionality, users with more advanced use-cases should familiarise themselves with Python's logging features, https://docs.python.org/3/library/logging.html.
+Whilst ia-map-lib's logging extensions have been designed to be intuitive and provide out-of-the-box functionality, users with more advanced use-cases should familiarise themselves with Python's logging features, https://docs.python.org/3/library/logging.html.
 
 
 
 ## Handler and Formatter 
 
 
-### `ianode_lib.logging.KafkaHandler`
+### `ia_map_lib.logging.KafkaHandler`
 
 In addition to the standard `logging.Handler` parameters, `KafkaHandler` accepts:
 
@@ -28,7 +28,7 @@ topic
     : *Default: log*, the topic to write log entries to.
 
 
-### `ianode_lib.logging.JSONFormatter`
+### `ia_map_lib.logging.JSONFormatter`
 
 In addition to the standard `logging.Formatter` parameters, `JSONFormatter` accepts:
 
@@ -43,11 +43,11 @@ It is recommended not to include `headers` in the message itself when using with
 
 ## Core Logger Adaptor
 
-ianode-lib provides an adaptor to apply `headers` and `log_type` to all log entries as additional parameters instead of being supplied through `extra`. 
+ia-map-lib provides an adaptor to apply `headers` and `log_type` to all log entries as additional parameters instead of being supplied through `extra`. 
 If default values are provided to the Adaptor these will be applied to all entries, however individual log entries may also specify their own values as parameters. 
 
 
-### `ianode_lib.logging.CoreLoggerAdaptor`
+### `ia_map_lib.logging.CoreLoggerAdaptor`
 
 headers
     : *Default: {}*, specifies the default headers to apply to all log messages.
@@ -56,17 +56,17 @@ log_type
     : *Default: None*, allows a user to specify a log type for granular auditing.
 
 header_method
-    : *Default: ianode-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers dictionary. To replace the entire headers dictionary on a per-message basis instead of merging use `ianode-lib.logging.REPLACE`.
+    : *Default: ia-map-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers dictionary. To replace the entire headers dictionary on a per-message basis instead of merging use `ia-map-lib.logging.REPLACE`.
 
 
 
 ## Core Logger Factory
 
-Python logging is highly flexible, and whilst each of the provided classes by ianode-lib can be used and configured much like the classes provided in Python's standard logging library, ianode-lib also provides a logger factory that will configure a logger that is applicable to most use-cases of ianode-lib.
+Python logging is highly flexible, and whilst each of the provided classes by ia-map-lib can be used and configured much like the classes provided in Python's standard logging library, ia-map-lib also provides a logger factory that will configure a logger that is applicable to most use-cases of ia-map-lib.
 The factory provides a logger with the `KafkaHandler`, `JSONFormatter` and `CoreLoggerAdaptor` configured, but each of their parameters can be overriden on initialisation. 
 
 
-### `ianode_lib.logging.CoreLoggerFactory`
+### `ia_map_lib.logging.CoreLoggerFactory`
 
 broker
     : *Required*, the broker instance to write logs to
@@ -84,7 +84,7 @@ fmt
     : *Default: ['name', 'log_type', 'levelname', 'msg', 'created', 'headers']*, specifies which values of a log record's dictionary to include in the message
 
 header_method
-    : *Default: ianode-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers. To replace headers instead of merging use ianode-lib.logging.REPLACE.
+    : *Default: ia-map-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers. To replace headers instead of merging use ia-map-lib.logging.REPLACE.
  
 
 
@@ -95,7 +95,7 @@ The logger can be configured programmatically much like any standard Python logg
 ```python
 import logging
 
-from ianode_lib.logging import KafkaHandler, JSONFormatter
+from ia_map_lib.logging import KafkaHandler, JSONFormatter
 
 
 logger = logging.getLogger(__name__)
@@ -115,7 +115,7 @@ The logger factory can be customised as follows:
 
 ```python
 import uuid
-from ianode_lib.logging import CoreLoggerFactory
+from ia_map_lib.logging import CoreLoggerFactory
 
 
 logger = CoreLoggerFactory.get_logger(
@@ -148,7 +148,7 @@ logging_config = {
             'format': "%(asctime)s {app} [%(thread)d] %(levelname)-5s %(name)s - %(message)s. [file=%(filename)s:%(lineno)d]"
         },
         'json': {
-            'class': 'ianode_lib.logging.JSONFormatter'
+            'class': 'ia_map_lib.logging.JSONFormatter'
         }
     },
     "handlers": {
@@ -159,7 +159,7 @@ logging_config = {
             'stream': 'ext://sys.stdout'
         },
         'core': {
-            'class': 'ianode_lib.logging.KafkaHandler',
+            'class': 'ia_map_lib.logging.KafkaHandler',
             'level': logging.INFO,
             'formatter': 'json',
             'broker': "localhost:9092"

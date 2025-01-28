@@ -11,7 +11,7 @@ A mapping function conforms to the [`RecordMapper`](records.md#working-with-reco
 the following signature:
 
 ```python
-from ianode_lib import Record
+from ia_map_lib import Record
 
 def example_mapping_function(record: Record) -> Record | list[Record] | None:
     return record
@@ -31,7 +31,7 @@ subclass this class to create advanced mapping functions e.g. those that store s
 etc., by extending this class.  For example consider the following example:
 
 ```python
-from ianode_lib import Record, RecordMapper
+from ia_map_lib import Record, RecordMapper
 
 class MyCustomMapper(RecordMapper):
   def __init__(self):
@@ -55,9 +55,9 @@ In this example we use the a [`DictionarySource`](data-sources.md#dictionary-sou
 [`DictionarySink`](data-sinks.md#dictionary-sink) to provide dummy data for the mapper.
 
 ```python
-from ianode_lib import Record, Mapper
-from ianode_lib.sinks.dictSink import DictionarySink
-from ianode_lib.sources.dictSource import DictionarySource
+from ia_map_lib import Record, Mapper
+from ia_map_lib.sinks.dictSink import DictionarySink
+from ia_map_lib.sources.dictSource import DictionarySource
 
 # Define a mapping function
 def to_upper(record: Record) -> Record | list[Record] | None:

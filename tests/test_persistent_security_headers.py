@@ -3,10 +3,10 @@ from __future__ import annotations
 import os
 from unittest import TestCase, mock
 
-from ianode_lib import Record, RecordUtils
-from ianode_lib.mapper import Mapper
-from ianode_lib.sinks.listSink import ListSink
-from ianode_lib.sources.listSource import ListSource
+from ia_map_lib import Record, RecordUtils
+from ia_map_lib.mapper import Mapper
+from ia_map_lib.sinks.listSink import ListSink
+from ia_map_lib.sources.listSource import ListSource
 
 
 def __map_function_no_headers__(record: Record, **map_args) -> Record | list[Record] | None:

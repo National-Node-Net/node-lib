@@ -1,7 +1,7 @@
 from typing import Any
 
-from ianode_lib import Record
-from ianode_lib.sinks import DataSink
+from ia_map_lib import Record
+from ia_map_lib.sinks import DataSink
 
 __license__ = """
 Copyright (c) Telicent Ltd.

@@ -9,12 +9,12 @@ from colored import colored, fore, style
 from opentelemetry import metrics, trace
 from opentelemetry.metrics import CallbackOptions, Observation
 
-from ianode_lib.errors import PrintErrorHandler, auto_discover_error_handler
-from ianode_lib.records import Record
-from ianode_lib.reporter import Reporter
-from ianode_lib.sinks import DataSink
-from ianode_lib.sources import DataSource
-from ianode_lib.status import Status
+from ia_map_lib.errors import PrintErrorHandler, auto_discover_error_handler
+from ia_map_lib.records import Record
+from ia_map_lib.reporter import Reporter
+from ia_map_lib.sinks import DataSink
+from ia_map_lib.sources import DataSource
+from ia_map_lib.status import Status
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -183,7 +183,7 @@ class Action:
 
     @property
     def telemetry_id(self):
-        return f"ianode_lib.{self.action_type}.{self.generate_id()}"
+        return f"ia_map_lib.{self.action_type}.{self.generate_id()}"
 
     def __get_items_processed_rate__(self, options: CallbackOptions) -> Iterable[Observation]:
         total_elapsed = __calculate_elapsed__(self.processed_metric_timer)

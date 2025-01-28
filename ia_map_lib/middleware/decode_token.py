@@ -4,8 +4,8 @@ import jwt
 import requests
 from werkzeug.wrappers import Request, Response
 
-from ianode_lib.exceptions import ConfigurationException
-from ianode_lib.logging import CoreLoggerFactory
+from ia_map_lib.exceptions import ConfigurationException
+from ia_map_lib.logging import CoreLoggerFactory
 
 __license__ = """
 Copyright (c) Telicent Ltd.

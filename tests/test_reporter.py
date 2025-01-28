@@ -2,9 +2,9 @@ import json
 import time
 import unittest
 
-from ianode_lib.reporter import Reporter
-from ianode_lib.sinks.listSink import ListSink
-from ianode_lib.status import Status
+from ia_map_lib.reporter import Reporter
+from ia_map_lib.sinks.listSink import ListSink
+from ia_map_lib.status import Status
 from tests.test_records import RecordVerifier
 
 

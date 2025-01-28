@@ -12,11 +12,11 @@ from threading import Thread
 
 import pytz
 
-from ianode_lib.config import Configurator
-from ianode_lib.records import Record
-from ianode_lib.sinks.dataSink import DataSink
-from ianode_lib.sinks.kafkaSink import KafkaSink
-from ianode_lib.status import Status
+from ia_map_lib.config import Configurator
+from ia_map_lib.records import Record
+from ia_map_lib.sinks.dataSink import DataSink
+from ia_map_lib.sinks.kafkaSink import KafkaSink
+from ia_map_lib.status import Status
 
 __license__ = """
 Copyright (c) Telicent Ltd.

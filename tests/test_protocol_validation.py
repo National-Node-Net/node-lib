@@ -3,8 +3,8 @@ from __future__ import annotations
 import unittest
 from typing import Any, Protocol, runtime_checkable
 
-from ianode_lib.sources import DeserializerFunction
-from ianode_lib.utils import validate_callable_protocol
+from ia_map_lib.sources import DeserializerFunction
+from ia_map_lib.utils import validate_callable_protocol
 
 
 def not_a_deserializer(a: int, b: int) -> int:

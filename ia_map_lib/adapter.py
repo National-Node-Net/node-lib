@@ -8,14 +8,14 @@ from typing import Any
 from colored import fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
-from ianode_lib.action import DEFAULT_REPORTING_BATCH_SIZE, OutputAction
-from ianode_lib.config import Configurator
-from ianode_lib.datasets.datasets import SimpleDataSet
-from ianode_lib.records import Record, RecordAdapter, RecordUtils
-from ianode_lib.sinks import KafkaSink
-from ianode_lib.sinks.dataSink import DataSink
-from ianode_lib.status import Status
-from ianode_lib.utils import validate_callable_protocol
+from ia_map_lib.action import DEFAULT_REPORTING_BATCH_SIZE, OutputAction
+from ia_map_lib.config import Configurator
+from ia_map_lib.datasets.datasets import SimpleDataSet
+from ia_map_lib.records import Record, RecordAdapter, RecordUtils
+from ia_map_lib.sinks import KafkaSink
+from ia_map_lib.sinks.dataSink import DataSink
+from ia_map_lib.status import Status
+from ia_map_lib.utils import validate_callable_protocol
 
 __license__ = """
 Copyright (c) Telicent Ltd.

@@ -1,8 +1,8 @@
 
 from collections.abc import Iterable
 
-from ianode_lib.records import Record
-from ianode_lib.sources.dataSource import DataSource
+from ia_map_lib.records import Record
+from ia_map_lib.sources.dataSource import DataSource
 
 
 class ListSource(DataSource):

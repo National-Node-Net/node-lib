@@ -1,6 +1,6 @@
-# SecurityLabel Modules in ianode-lib 
+# SecurityLabel Modules in ia-map-lib 
 
-ianode-lib can be leveraged alongside the [label-builder](https://github.com/National-Digital-Twin/label-builder)  to 
+ia-map-lib can be leveraged alongside the [label-builder](https://github.com/National-Digital-Twin/label-builder)  to 
 facilitate the validation of data headers against a predefined model that encapsulates a security policy framework. 
 While there is no fully operational implementation of policy-based access control (PBAC) at this time, the library allows 
 for the validation of data headers against a chosen model to ensure that all required fields are populated and that the 
@@ -12,10 +12,10 @@ mappers in a pipeline will automatically persist that header value, unless anoth
 `Security-Label` header.  This behaviour can be disabled by setting the [configuration](configuration.md) value of 
 `DISABLE_PERSISTENT_HEADERS` to `"1"`.
 
-It is important to note that ianode-lib does not enforce any of these operations; 
+It is important to note that ia-map-lib does not enforce any of these operations; 
 the implementation is entirely at the discretion of the user. The label-builder module provides users with the 
 functionality to define and implement their own models. For guidance purposes, the label-builder currently includes 
-an implementation of the IANodeModel. label-builder is not a dependency of ianode-lib.
+an implementation of the IANodeModel. label-builder is not a dependency of ia-map-lib.
 
 ```python
 data_header = {

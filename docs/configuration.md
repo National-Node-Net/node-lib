@@ -10,7 +10,7 @@ the `EnvironmentSource` which reads from the OS Environment. Once you have a `Co
 method to read in configuration, providing default values and converter functions as needed e.g.
 
 ```python
-from ianode_lib.config import Configurator
+from ia_map_lib.config import Configurator
 
 config = Configurator()
 broker = config.get("BOOTSTRAP_SERVERS", required=True,
@@ -34,7 +34,7 @@ handled is controlled by the `on_error` parameter of the `get()` method. If not 
 `sys.exit()` is controlled by the `exit_code` parameter of the `Configurator` constructor e.g.
 
 ```python
-from ianode_lib.config import Configurator
+from ia_map_lib.config import Configurator
 
 config = Configurator(exit_code=127)
 config.get(config_key="NO_SUCH_CONFIG", required=True)
@@ -47,7 +47,7 @@ Alternatively we can have `Configurator` just raise a `ValueError` by setting `o
 RAISE_EXCEPTION` e.g.
 
 ```python
-from ianode_lib.config import Configurator, OnError
+from ia_map_lib.config import Configurator, OnError
 
 config = Configurator(exit_code=127)
 config.get(config_key="NO_SUCH_CONFIG", required=True, on_error=OnError.RAISE_EXCEPTION)
@@ -62,7 +62,7 @@ If your application is not finding the Configuration you are expecting, and you 
 the `debug` parameter to the constructor e.g.
 
 ```python
-from ianode_lib.config import Configurator
+from ia_map_lib.config import Configurator
 
 config = Configurator(debug=True)
 broker = config.get("BOOTSTRAP_SERVERS", required=True,
@@ -96,7 +96,7 @@ the `ConfigSource` correctly when used with the [`debug`](#debugging-configurati
 In the following example we provide configuration from a dictionary:
 
 ```python
-from ianode_lib.config import Configurator, ConfigSource
+from ia_map_lib.config import Configurator, ConfigSource
 
 
 class DictionaryConfig(ConfigSource):

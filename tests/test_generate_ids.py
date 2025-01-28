@@ -3,10 +3,10 @@ from __future__ import annotations
 from collections.abc import Iterable
 from unittest import TestCase
 
-from ianode_lib import Adapter, AutomaticAdapter, Mapper, Projector, Record
-from ianode_lib.action import Action, InputAction, InputOutputAction, OutputAction
-from ianode_lib.sinks.listSink import ListSink
-from ianode_lib.sources.listSource import ListSource
+from ia_map_lib import Adapter, AutomaticAdapter, Mapper, Projector, Record
+from ia_map_lib.action import Action, InputAction, InputOutputAction, OutputAction
+from ia_map_lib.sinks.listSink import ListSink
+from ia_map_lib.sources.listSource import ListSource
 
 
 class ActionTestCase(TestCase):

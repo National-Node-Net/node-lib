@@ -4,7 +4,7 @@ import configparser
 import logging
 from abc import ABC, abstractmethod
 
-from ianode_lib.config import Configurator, OnError
+from ia_map_lib.config import Configurator, OnError
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -56,7 +56,7 @@ class TomlKafkaConfig(KafkaConfig):
     Class capable of loading a toml-like file for kafka config. It's toml-like because it's based around Java
     properties files which are very much toml-like, if not explicitly toml.
 
-    A valid file path must be set with ianode-lib's only configurator with the key KAFKA_CONFIG_FILE_PATH
+    A valid file path must be set with ia-map-lib's only configurator with the key KAFKA_CONFIG_FILE_PATH
     pointing to the configuration file's absolute path.
     """
 

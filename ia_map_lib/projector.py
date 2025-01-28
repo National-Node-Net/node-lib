@@ -1,11 +1,11 @@
 from colored import fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
-from ianode_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputAction
-from ianode_lib.records import RecordProjector, RecordUtils
-from ianode_lib.sources import DataSource
-from ianode_lib.status import Status
-from ianode_lib.utils import validate_callable_protocol
+from ia_map_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputAction
+from ia_map_lib.records import RecordProjector, RecordUtils
+from ia_map_lib.sources import DataSource
+from ia_map_lib.status import Status
+from ia_map_lib.utils import validate_callable_protocol
 
 __license__ = """
 Copyright (c) Telicent Ltd.

@@ -7,8 +7,8 @@ from typing import Any
 
 from confluent_kafka import KafkaException
 
-from ianode_lib import Record, RecordUtils
-from ianode_lib.sinks import KafkaSink
+from ia_map_lib import Record, RecordUtils
+from ia_map_lib.sinks import KafkaSink
 
 __license__ = """
 Copyright (c) Telicent Ltd.

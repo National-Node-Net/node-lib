@@ -1,4 +1,6 @@
-from ianode_lib.datasets.datasets import DCATDataSet, SimpleDataSet
+from ia_map_lib.sinks.dataSink import DataSink
+from ia_map_lib.sinks.kafkaSink import KafkaSink
+from ia_map_lib.sinks.serializers import RdfSerializer, SerializerFunction, Serializers
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -18,6 +20,5 @@ limitations under the License.
 
 
 __all__ = [
-    'DCATDataSet',
-    'SimpleDataSet',
+    'SerializerFunction', 'Serializers', 'RdfSerializer', 'DataSink', 'KafkaSink'
 ]

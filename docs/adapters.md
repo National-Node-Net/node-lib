@@ -22,7 +22,7 @@ An adapter function has the following signature:
 
 ```python
 from typing import Iterable
-from ianode_lib import Record
+from ia_map_lib import Record
 
 def example_adapter_function() -> Iterable[Record]:
     for i in range(0, 10000):
@@ -57,8 +57,8 @@ Here's a basic example of using a manual `Adapter`, the details of how the data 
 transformed for ingest into Kafka are omitted:
 
 ```python
-from ianode_lib import Adapter, Record
-from ianode_lib.sinks import KafkaSink
+from ia_map_lib import Adapter, Record
+from ia_map_lib.sinks import KafkaSink
 
 # Access your data source
 some_data_source = open_data_source()
@@ -105,8 +105,8 @@ sequence of `Record` instances we want to write out to the `DataSink`:
 
 ```python
 from typing import Iterable
-from ianode_lib import AutomaticAdapter, Record
-from ianode_lib.sinks import KafkaSink
+from ia_map_lib import AutomaticAdapter, Record
+from ia_map_lib.sinks import KafkaSink
 
 # Access your data source
 some_data_source = open_data_source()

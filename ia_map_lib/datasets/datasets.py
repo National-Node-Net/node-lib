@@ -7,7 +7,7 @@ from datetime import datetime
 
 from rdflib import DCAT, DCTERMS, PROV, RDF, SDO, XSD, BNode, Graph, Literal, URIRef
 
-from ianode_lib.records import Record
+from ia_map_lib.records import Record
 
 
 class DataSetFieldError(Exception):

@@ -1,6 +1,6 @@
 # Error Handling
 
-ianode-lib will report any errors encountered within an Adaptor, Mapper, or Projector execution to a Kafka topic by default. 
+ia-map-lib will report any errors encountered within an Adaptor, Mapper, or Projector execution to a Kafka topic by default. 
 
 It is possible at run-time to set headers to be included in all error messages and to access the error handler directly to provide fine-graining control over the behaviour of the application, for example, allowing execution to continue is an error is encountered with a specific record.
 
@@ -49,7 +49,7 @@ def process_data():
 The default error handler can be configured and even replaced through environmental variables.
 
 ERROR_HANDLER_CLASS
-    : *default*: ianode_lib.error.KafkaErrorHandler.
+    : *default*: ia_map_lib.error.KafkaErrorHandler.
 
 ERROR_HANDLER_PROVENANCE_TOPIC
     : *default*: provenance.errors
@@ -59,7 +59,7 @@ ERROR_HANDLER_PROVENANCE_TOPIC
 
 ```python
 # Replace with different error handler
-from ianode_lib.errors import FileBasedErrorHandler
+from ia_map_lib.errors import FileBasedErrorHandler
 
 error_handler = FileBasedErrorHandler(component_id='my-adapter', file_path='errors.log')
 adapter = Adapter(target=target, name=name, source_name=source_name, error_handler=error_handler)
