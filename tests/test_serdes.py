@@ -12,10 +12,10 @@ from rdflib import RDF, RDFS, BNode, Dataset, Graph, URIRef
 from rdflib.compare import to_isomorphic
 from rdflib.graph import DATASET_DEFAULT_GRAPH_ID
 
-from telicent_lib.sinks import KafkaSink, Serializers
-from telicent_lib.sinks.serializers import RdfSerializer, SerializerFunction
-from telicent_lib.sources import Deserializers, KafkaSource
-from telicent_lib.sources.deserializers import DeserializerFunction, RdfDeserializer
+from ia_map_lib.sinks import KafkaSink, Serializers
+from ia_map_lib.sinks.serializers import RdfSerializer, SerializerFunction
+from ia_map_lib.sources import Deserializers, KafkaSource
+from ia_map_lib.sources.deserializers import DeserializerFunction, RdfDeserializer
 
 
 def __default_serdes__() -> list[tuple[Callable[[Any], bytes | None], Callable[[bytes | None], bytes | Any]]]:
