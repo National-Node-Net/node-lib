@@ -3,10 +3,10 @@ requires = ["setuptools>=61.2.0", "wheel==0.41.3", "pip-tools==7.3.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "telicent-lib"
+name = "ia-map-lib"
 version = "3.1.1"
-authors = [{name = "Telicent Ltd", email = "opensource@telicent.io"}]
-description = "A helper package for building Adapters, Mappers and Projectors for Telicent Core"
+authors = [{name = "National Digital Twin Programme"}]
+description = "A helper package for building Adapters, Mappers and Projectors for Integration Architecture Node"
 requires-python = ">=3.9"
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -90,7 +90,7 @@ exclude = [
 line-length = 120
 
 [project.urls]
-Repository = "https://github.com/telicent-oss/telicent-lib"
+Repository = "https://github.com/National-Digital-Twin/ia-map-lib"
 
 [tool.distutils.bdist_wheel]
 universal = true
@@ -99,13 +99,13 @@ universal = true
 include-package-data = true
 
 [tool.setuptools.packages.find]
-include = ["telicent_lib*"]
+include = ["ia_map_lib*"]
 namespaces = true
 
 [tool.setuptools.package-data]
-"telicent_lib" = ["sbom.json"]
+"ia_map_lib" = ["sbom.json"]
 
 [tool.mypy]
 no_implicit_optional = false
 ignore_missing_imports = true
-modules = ["telicent_lib", "tests", "debug"]
+modules = ["ia_map_lib", "tests", "debug"]

@@ -8,9 +8,9 @@ from unittest.mock import patch
 import pytz
 
 # from rdflib import Graph
-from telicent_lib import AutomaticAdapter, Record
-from telicent_lib.datasets.datasets import SimpleDataSet
-from telicent_lib.sinks.listSink import ListSink
+from ia_map_lib import AutomaticAdapter, Record
+from ia_map_lib.datasets.datasets import SimpleDataSet
+from ia_map_lib.sinks.listSink import ListSink
 
 
 def __adapter_function_no_headers__() -> Record | list[Record] | None:
@@ -27,10 +27,10 @@ class DataCatalogTestCase(TestCase):
                                    has_error_handler=False, has_data_catalog=True, dataset=dataset,
                                    data_catalog_sink=dc_sink, name='TestAdapter')
 
-        with patch('telicent_lib.datasets.datasets.datetime') as frozen_datetime:
+        with patch('ia_map_lib.datasets.datasets.datetime') as frozen_datetime:
             mock_now = datetime(2000, 1, 1, 0, 0, 0, tzinfo=pytz.UTC)
             frozen_datetime.now.return_value = mock_now
-            with patch('telicent_lib.adapter.uuid.uuid4') as patched_uuid:
+            with patch('ia_map_lib.adapter.uuid.uuid4') as patched_uuid:
                 patched_uuid.return_value = 'my-uuid'
                 adapter.update_data_catalog()
         dc_msg = dc_sink.get()[0]
@@ -65,7 +65,7 @@ class DataCatalogTestCase(TestCase):
             'distribution_title': "Distribution Title",
             'distribution_id': "14343-232-90019"
         }
-        with patch('telicent_lib.adapter.uuid.uuid4') as patched_uuid:
+        with patch('ia_map_lib.adapter.uuid.uuid4') as patched_uuid:
             patched_uuid.return_value = 'my-uuid'
             adapter.register_data_catalog(registration_fields)
         expected_message = {

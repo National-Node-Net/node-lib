@@ -5,14 +5,14 @@ import time
 from typing import Any
 
 # noinspection PyProtectedMember
-from telicent_lib import Mapper, Record
-from telicent_lib.action import Action
-from telicent_lib.config import Configurator
-from telicent_lib.sinks import KafkaSink, SerializerFunction, Serializers
-from telicent_lib.sinks.dictSink import DictionarySink
-from telicent_lib.sources import DeserializerFunction, Deserializers, KafkaSource
-from telicent_lib.sources.dictSource import DictionarySource
-from telicent_lib.utils import validate_callable_protocol
+from ia_map_lib import Mapper, Record
+from ia_map_lib.action import Action
+from ia_map_lib.config import Configurator
+from ia_map_lib.sinks import KafkaSink, SerializerFunction, Serializers
+from ia_map_lib.sinks.dictSink import DictionarySink
+from ia_map_lib.sources import DeserializerFunction, Deserializers, KafkaSource
+from ia_map_lib.sources.dictSource import DictionarySource
+from ia_map_lib.utils import validate_callable_protocol
 
 
 def int_to_bytes(data: Any) -> bytes | None:

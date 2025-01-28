@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import unittest
 
-from telicent_lib import Projector, Record, RecordProjector
-from telicent_lib.sources.listSource import ListSource
+from ia_map_lib import Projector, Record, RecordProjector
+from ia_map_lib.sources.listSource import ListSource
 from tests.test_records import RecordVerifier
 
 
