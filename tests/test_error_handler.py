@@ -4,10 +4,10 @@ import json
 from collections.abc import Iterable
 from unittest import TestCase, mock
 
-from telicent_lib import AutomaticAdapter, Mapper, Projector, Record
-from telicent_lib.errors import ErrorHandler, ErrorLevel
-from telicent_lib.sinks.listSink import ListSink
-from telicent_lib.sources.listSource import ListSource
+from ia_map_lib import AutomaticAdapter, Mapper, Projector, Record
+from ia_map_lib.errors import ErrorHandler, ErrorLevel
+from ia_map_lib.sinks.listSink import ListSink
+from ia_map_lib.sources.listSource import ListSource
 
 
 class FakeErrorHandler(ErrorHandler):
@@ -78,7 +78,7 @@ class ErrorHandlerTestCase(ErrorHandlerTestCaseStub):
 
 class ErrorHandlerUseCaseTestCase(ErrorHandlerTestCaseStub):
 
-    @mock.patch('telicent_lib.errors.ErrorHandler.send_exception')
+    @mock.patch('ia_map_lib.errors.ErrorHandler.send_exception')
     def test_adaptor_error_handler(self, mocked_send_exception):
         adapter = AutomaticAdapter(
             adapter_function=fake_adapter_function,
@@ -92,7 +92,7 @@ class ErrorHandlerUseCaseTestCase(ErrorHandlerTestCaseStub):
 
         self.assertEqual(1, mocked_send_exception.call_count)
 
-    @mock.patch('telicent_lib.errors.ErrorHandler.send_exception')
+    @mock.patch('ia_map_lib.errors.ErrorHandler.send_exception')
     def test_mapper_error_handler(self, mocked_send_exception):
         mapper = Mapper(
             map_function=fake_mapper_function, source=ListSource(['one', 'two']),
@@ -106,7 +106,7 @@ class ErrorHandlerUseCaseTestCase(ErrorHandlerTestCaseStub):
 
         self.assertEqual(1, mocked_send_exception.call_count)
 
-    @mock.patch('telicent_lib.errors.ErrorHandler.send_exception')
+    @mock.patch('ia_map_lib.errors.ErrorHandler.send_exception')
     def test_projector_error_handler(self, mocked_send_exception):
         projector = Projector(
             projector_function=fake_projector_function, source=ListSource(['one', 'two']),

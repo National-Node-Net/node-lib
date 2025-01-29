@@ -11,7 +11,7 @@ The `KafkaSink` will deliver your records to Kafka. It requires a topic be speci
 but will use sensible default if not.
 
 ```python
-from telicent_lib.sinks import KafkaSink
+from ia_map_lib.sinks import KafkaSink
 
 sink = KafkaSink(topic="output-topic")
 ```
@@ -25,11 +25,11 @@ for a full specification of available configuration options.
 
 The minimum configuration required for a `KafkaSink` is to specify the broker to deliver records to. This can be specified
 manually by passing it as part of the `kafka_config`, or by setting the `BOOTSTRAP_SERVERS` [configuration](configuration.md) 
-variable. The latter is advised to prevent repetitively specifying the broker for all sinks, including telicent-lib's 
+variable. The latter is advised to prevent repetitively specifying the broker for all sinks, including ia-map-lib's 
 internal sinks.
 
 ```python
-from telicent_lib.sinks import KafkaSink
+from ia_map_lib.sinks import KafkaSink
 
 kafka_config = {
   'bootstrap.servers': 'localhost:1234'
@@ -58,8 +58,8 @@ a `None` or another special value in this case e.g.
 ```python
 import random
 from typing import Any
-from telicent_lib import Record
-from telicent_lib.sinks import KafkaSink
+from ia_map_lib import Record
+from ia_map_lib.sinks import KafkaSink
 
 
 def int_to_bytes(data: Any) -> bytes:
@@ -92,7 +92,7 @@ Attempting to use a serializer value that is not a `Serializer` instance, and do
 #### Built-In Serializer Functions
 
 There are some built-in serializer functions provided for simple use cases, these can be imported by doing
-a `from telicent_lib.sinks import Serializers` and then referring to static methods on the `Serializers` class:
+a `from ia_map_lib.sinks import Serializers` and then referring to static methods on the `Serializers` class:
 
 - `Serializers.to_zipped_binary` - Serializes a `str` into zlib compressed UTF-8 bytes.
 - `Serializers.to_binary` - Tries to serialize from any Python type into bytes. If already `bytes` leaves as-is, if a 
@@ -117,7 +117,7 @@ The `DictionarySink` is intended for development and testing only, it simply col
 records into a Python dictionary.
 
 ```python
-from telicent_lib.sinks.dictSink import DictionarySink
+from ia_map_lib.sinks.dictSink import DictionarySink
 
 sink = DictionarySink()
 
