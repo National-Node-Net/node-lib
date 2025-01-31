@@ -5,7 +5,7 @@ import uuid
 from collections.abc import Iterable, Mapping
 from typing import Any
 
-from colored import fore
+from colored import Fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
 from ia_map_lib.action import DEFAULT_REPORTING_BATCH_SIZE, OutputAction
@@ -104,7 +104,7 @@ class Adapter(BaseAdapter):
     themselves, transform the records and call the `send()` method of the adapter to send records to the data sink.
     """
 
-    def __init__(self, target: DataSink, text_colour=fore.LIGHT_CYAN, reporting_batch_size=DEFAULT_REPORTING_BATCH_SIZE,
+    def __init__(self, target: DataSink, text_colour=Fore.light_cyan, reporting_batch_size=DEFAULT_REPORTING_BATCH_SIZE,
                  name: str = None, dataset=None, has_reporter: bool = True,
                  reporter_sink=None, has_error_handler: bool = True, error_handler=None, disable_metrics: bool = False,
                  has_data_catalog: bool = True, data_catalog_sink = None):
@@ -115,7 +115,7 @@ class Adapter(BaseAdapter):
         :type target: DataSink
         :param text_colour:
             An ANSI color code to control the colour of the output.  `colored` is a dependency of this library and
-            provides many useful constants in its `fore`, `back` and `style` packages.
+            provides many useful constants in its `Fore`, `back` and `style` packages.
         :type text_colour: str
         :param name: The name of the Adapter, used in the startup banner
         :type name: str
@@ -190,7 +190,7 @@ class AutomaticAdapter(BaseAdapter):
     """
 
     def __init__(self, target: DataSink, adapter_function: RecordAdapter, dataset=None, name: str = None,
-                 text_colour=fore.LIGHT_CYAN, reporting_batch_size=DEFAULT_REPORTING_BATCH_SIZE,
+                 text_colour=Fore.light_cyan, reporting_batch_size=DEFAULT_REPORTING_BATCH_SIZE,
                  has_reporter: bool = True, reporter_sink=None,
                  has_error_handler: bool = True, error_handler=None, disable_metrics: bool = False,
                  has_data_catalog: bool = True, data_catalog_sink = None, **adapter_args):
@@ -204,7 +204,7 @@ class AutomaticAdapter(BaseAdapter):
             to the provided data sink.
         :param text_colour:
             An ANSI color code to control the colour of the output.  `colored` is a dependency of this library and
-            provides many useful constants in its `fore`, `back` and `style` packages.
+            provides many useful constants in its `Fore`, `back` and `style` packages.
         :type text_colour: str
         :param name: The name of the Adapter
         :type name: str
