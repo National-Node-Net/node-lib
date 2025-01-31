@@ -1,4 +1,4 @@
-from colored import fore
+from colored import Fore
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 
 from ia_map_lib.action import DEFAULT_REPORTING_BATCH_SIZE, InputAction
@@ -33,7 +33,7 @@ class Projector(InputAction):
     """
 
     def __init__(self, source: DataSource, projector_function: RecordProjector, target_store: str,
-                 target_type: str = None, text_colour: str = fore.GREEN,
+                 target_type: str = None, text_colour: str = Fore.green,
                  reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE, name: str = None, has_reporter: bool = True,
                  reporter_sink=None,
                  has_error_handler: bool = True, error_handler=None, **projector_args):
@@ -47,7 +47,7 @@ class Projector(InputAction):
         :type projector_function: RecordProjector
         :param text_colour:
             An ANSI color code to control the colour of the output.  `colored` is a dependency of this library and
-            provides many useful constants in its `fore`, `back` and `style` packages.
+            provides many useful constants in its `Fore`, `back` and `style` packages.
         :type text_colour: str
         :param reporting_batch_size: How often to report progress expressed in terms of number of records
         :type reporting_batch_size: int
