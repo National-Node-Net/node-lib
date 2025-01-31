@@ -5,7 +5,7 @@ import sys
 import time
 from collections.abc import Iterable
 
-from colored import colored, fore, style
+from colored import Colored, Fore, style
 from opentelemetry import metrics, trace
 from opentelemetry.metrics import CallbackOptions, Observation
 
@@ -70,7 +70,7 @@ class Action:
     """Represents an action that is executed on the IANode Core Platform"""
 
     def __init__(
-            self, text_colour: str = fore.LIGHT_GRAY, reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE,
+            self, text_colour: str = Fore.light_gray, reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE,
             action: str = None, name: str = None, has_error_handler: bool = True, error_handler=None,
             has_reporter: bool = True, reporter_sink=None, disable_metrics: bool = False
          ):
@@ -79,7 +79,7 @@ class Action:
 
         :param text_colour:
             Specifies a colour for the text, this should be in the form of the ANSI Control Code for the desired colour.
-            `colored` is a dependency of this library and provides many useful constants in its `fore`, `back` and
+            `Colored` is a dependency of this library and provides many useful constants in its `Fore`, `back` and
             `style` packages.
         :type text_colour: str
         :param reporting_batch_size:
@@ -98,7 +98,7 @@ class Action:
         # If not on a TTY then we disable colourisation UNLESS the environment explicitly enables it
         self.include_error_handler = has_error_handler
         self.text_colour = text_colour
-        self.colors_enabled = self.text_colour is not None and (sys.stdout.isatty() or colored(fore.RED).enabled())
+        self.colors_enabled = self.text_colour is not None and (sys.stdout.isatty() or Colored(Fore.red).enabled())
         if not self.colors_enabled:
             print("Detected not a TTY (or no colour provided), disabled colourised output")
         self.reporter_sink = reporter_sink
@@ -485,7 +485,7 @@ class Action:
 
 
 class OutputAction(Action):
-    def __init__(self, target: DataSink, text_colour: str = fore.LIGHT_CYAN,
+    def __init__(self, target: DataSink, text_colour: str = Fore.light_cyan,
                  reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE,
                  action: str = None, name: str = None, has_reporter: bool = True, reporter_sink=None,
                  has_error_handler: bool = True, error_handler=None, disable_metrics: bool = False):
@@ -544,7 +544,7 @@ class OutputAction(Action):
 
 
 class InputAction(Action):
-    def __init__(self, source: DataSource, text_colour: str = fore.GREEN,
+    def __init__(self, source: DataSource, text_colour: str = Fore.green,
                  reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE, action: str = None, name: str = None,
                  has_reporter: bool = True, reporter_sink=None, has_error_handler: bool = True, error_handler=None,
                  disable_metrics: bool = False):
@@ -594,7 +594,7 @@ class InputAction(Action):
 
 
 class InputOutputAction(OutputAction):
-    def __init__(self, source: DataSource, target: DataSink, text_colour: str = fore.YELLOW,
+    def __init__(self, source: DataSource, target: DataSink, text_colour: str = Fore.yellow,
                  reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE,
                  action: str = None, name: str = None, has_reporter: bool = True, reporter_sink=None,
                  has_error_handler: bool = True, error_handler=None, disable_metrics: bool = False):
