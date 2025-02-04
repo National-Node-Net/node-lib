@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.2.0", "wheel==0.41.3", "pip-tools==7.3.0"]
+requires = ["setuptools>=61.2.0", "wheel==0.45.1", "pip-tools==7.4.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -11,15 +11,15 @@ requires-python = ">=3.9"
 license = {file = "LICENSE"}
 readme = "README.md"
 dependencies = [
-    "colored==1.4.4",
-    "rdflib==6.3.2",
-    "Werkzeug==3.0.3",
-    "PyJWT==2.8.0",
+    "colored==2.2.5",
+    "rdflib==7.1.3",
+    "Werkzeug==3.1.3",
+    "PyJWT==2.10.1",
     "requests==2.32.3",
-    "pytz==2022.6",
-    "confluent-kafka==2.3.0",
-    "opentelemetry-api==1.20.0",
-    "opentelemetry-sdk==1.20.0"
+    "pytz==2025.1",
+    "confluent-kafka==2.8.0",
+    "opentelemetry-api==1.30.0",
+    "opentelemetry-sdk==1.30.0"
 ]
 classifiers = [
     "Programming Language :: Python :: 3.9",
@@ -37,14 +37,14 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = [
-    "pre-commit==3.5.0",
-    "ruff==0.1.5",
-    "types-pytz==2023.3.1.1",
-    "urllib3==2.2.2",
-    "types-requests==2.32.0.20240622",
-    "mypy==1.7.0",
-    "mkdocs==1.5.3",
-    "cyclonedx-bom==4.4.3"
+    "pre-commit==4.1.0",
+    "ruff==0.9.4",
+    "types-pytz==2025.1.0.20250204",
+    "urllib3==2.3.0",
+    "types-requests==2.32.0.20241016",
+    "mypy==1.14.1",
+    "mkdocs==1.6.1",
+    "cyclonedx-bom==5.1.2"
 ]
 
 [tool.setuptools.dynamic]
