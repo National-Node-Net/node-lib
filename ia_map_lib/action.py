@@ -67,7 +67,7 @@ DEFAULT_REPORTING_BATCH_SIZE: int = 25000
 
 
 class Action:
-    """Represents an action that is executed on the IANode Core Platform"""
+    """Represents an action that is executed on the IANode Platform"""
 
     def __init__(
             self, text_colour: str = Fore.light_gray, reporting_batch_size: int = DEFAULT_REPORTING_BATCH_SIZE,

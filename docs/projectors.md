@@ -1,7 +1,7 @@
 # Projectors
 
 A `Projector` is an action used to project data already within Integration Architecture Node out into another data store, typically one
-of our Smart Caches, for later consumption by applications.  A `Projector` is an automatic action meaning that you only
+of our Secure Agents, for later consumption by applications.  A `Projector` is an automatic action meaning that you only
 need create it with the desired [`DataSource`](data-sources.md) and projection function, before
 calling `run()` to run the projection process for you.
 
@@ -18,7 +18,7 @@ def example_projection_function(record: Record) -> None:
 ```
 
 The function takes in an input [`Record`](records.md) and projects it.  It has no return value meaning it has free rein
-to project the record to a Smart Cache, external system or otherwise process it as it sees fits.
+to project the record to a Secure Agents, external system or otherwise process it as it sees fits.
 
 ## Example Usage
 

@@ -41,7 +41,7 @@ class Reporter:
     """
     A reporter is an internal actions that reports to Integration Architecture Node the status of the component.
 
-    A reporters main responsibility is to register components to the CORE and provide a heartbeat for reporting.
+    A reporters main responsibility is to register components to the IANode and provide a heartbeat for reporting.
     """
     def __init__(self, action_name: str = None, target_name: str = None, target_type: str = None,
                  source_name: str = None, source_type: str = None, action: str = None, heartbeat_time: float = 15.0,
