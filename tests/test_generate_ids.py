@@ -56,14 +56,14 @@ class InputActionTestCase(TestCase):
         def my_func(record: Record) -> None:
             pass
         action = Projector(source=ListSource(), has_error_handler=False, has_reporter=False,
-                           projector_function=my_func, target_store='Smart Cache', disable_metrics=True)
+                           projector_function=my_func, target_store='Secure Agent', disable_metrics=True)
         self.assertEqual('Projector-from-In-Memory List(0 records)', action.generate_id())
 
     def test_named_action(self):
         def my_func(record: Record) -> None:
             pass
         action = Projector(source=ListSource(), has_error_handler=False, has_reporter=False,
-                           projector_function=my_func, target_store='Smart Cache', name='Test Action',
+                           projector_function=my_func, target_store='Secure Agent', name='Test Action',
                            disable_metrics=True)
         self.assertEqual('Test-Action', action.generate_id())
 

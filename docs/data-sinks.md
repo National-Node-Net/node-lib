@@ -25,7 +25,7 @@ for a full specification of available configuration options.
 
 The minimum configuration required for a `KafkaSink` is to specify the broker to deliver records to. This can be specified
 manually by passing it as part of the `kafka_config`, or by setting the `BOOTSTRAP_SERVERS` [configuration](configuration.md) 
-variable. The latter is advised to prevent repetitively specifying the broker for all sinks, including ia-map-lib's 
+variable. The latter is advised to prevent repetitively specifying the broker for all sinks, including node-lib's 
 internal sinks.
 
 ```python
