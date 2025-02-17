@@ -1,6 +1,6 @@
 # Logging
 
-ia-map-lib provides a flexible handler, formatter, and Adapter that integrates with Python's standard logging features giving users a fine-grained control to log messages from their applications to core.
+node-lib provides a flexible handler, formatter, and Adapter that integrates with Python's standard logging features giving users a fine-grained control to log messages from their applications to core.
 
 For users who want an efficient way to send logs from their applications to Kafka, a factory is provided to initialise a logger with defaults that can be overriden on-demand.
 
@@ -8,9 +8,9 @@ For users who want an efficient way to send logs from their applications to Kafk
 
 ## Python Logging Primer
 
-Python's standard library provides flexible logging tools that can be extended to a wide range of use cases. Most users will be familiar with sending formatted log strings to either plain-text files or STDOUT, however, ia-map-lib's users will likely gain more benefit from sending log entries to a Kafka topic. This is the intention behind ia-map-lib's logging extensions.
+Python's standard library provides flexible logging tools that can be extended to a wide range of use cases. Most users will be familiar with sending formatted log strings to either plain-text files or STDOUT, however, node-lib's users will likely gain more benefit from sending log entries to a Kafka topic. This is the intention behind node-lib's logging extensions.
 
-Whilst ia-map-lib's logging extensions have been designed to be intuitive and provide out-of-the-box functionality, users with more advanced use-cases should familiarise themselves with Python's logging features, https://docs.python.org/3/library/logging.html.
+Whilst node-lib's logging extensions have been designed to be intuitive and provide out-of-the-box functionality, users with more advanced use-cases should familiarise themselves with Python's logging features, https://docs.python.org/3/library/logging.html.
 
 
 
@@ -43,7 +43,7 @@ It is recommended not to include `headers` in the message itself when using with
 
 ## Core Logger Adaptor
 
-ia-map-lib provides an adaptor to apply `headers` and `log_type` to all log entries as additional parameters instead of being supplied through `extra`. 
+node-lib provides an adaptor to apply `headers` and `log_type` to all log entries as additional parameters instead of being supplied through `extra`. 
 If default values are provided to the Adaptor these will be applied to all entries, however individual log entries may also specify their own values as parameters. 
 
 
@@ -56,13 +56,13 @@ log_type
     : *Default: None*, allows a user to specify a log type for granular auditing.
 
 header_method
-    : *Default: ia-map-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers dictionary. To replace the entire headers dictionary on a per-message basis instead of merging use `ia-map-lib.logging.REPLACE`.
+    : *Default: node-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers dictionary. To replace the entire headers dictionary on a per-message basis instead of merging use `node-lib.logging.REPLACE`.
 
 
 
 ## Core Logger Factory
 
-Python logging is highly flexible, and whilst each of the provided classes by ia-map-lib can be used and configured much like the classes provided in Python's standard logging library, ia-map-lib also provides a logger factory that will configure a logger that is applicable to most use-cases of ia-map-lib.
+Python logging is highly flexible, and whilst each of the provided classes by node-lib can be used and configured much like the classes provided in Python's standard logging library, node-lib also provides a logger factory that will configure a logger that is applicable to most use-cases of node-lib.
 The factory provides a logger with the `KafkaHandler`, `JSONFormatter` and `CoreLoggerAdaptor` configured, but each of their parameters can be overriden on initialisation. 
 
 
@@ -84,7 +84,7 @@ fmt
     : *Default: ['name', 'log_type', 'levelname', 'msg', 'created', 'headers']*, specifies which values of a log record's dictionary to include in the message
 
 header_method
-    : *Default: ia-map-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers. To replace headers instead of merging use ia-map-lib.logging.REPLACE.
+    : *Default: node-lib.logging.MERGE*, allows a user to specify whether an individual log's headers are merged with or replace the default headers. To replace headers instead of merging use node-lib.logging.REPLACE.
  
 
 

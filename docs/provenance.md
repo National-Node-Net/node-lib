@@ -2,7 +2,7 @@
 
 ## Heartbeats
 
-When a ia-map-lib component is run, by default, it will automatically send a regular heartbeat messages to the provenance topic
+When a node-lib component is run, by default, it will automatically send a regular heartbeat messages to the provenance topic
 using a `KafkaSink`.
 
 The provenance topic can be specified with the environment variable `HEART_BEAT_PROVENANCE_TOPIC`. By default, heartbeats are 
@@ -82,7 +82,7 @@ mapper.run()
 
 ## Audit Headers
 
-ia-map-lib automatically applies headers to each record written by an adapter or a mapper. These records provide an audit that gives
+node-lib automatically applies headers to each record written by an adapter or a mapper. These records provide an audit that gives
 each record a unique ID, which component wrote the record, and in the case of a mapper, the unique ID of the source record.
 
 | Header             | Usage                                                                                                                            |
@@ -206,7 +206,7 @@ adapter.update_data_catalog(headers=RecordUtils.to_headers(headers))
 
 ### DCATDataSet
 
-ia-map-lib also provides a `DCATDataSet` class. It can be used in the same way as `SimpleDataSet`, but its output
+node-lib also provides a `DCATDataSet` class. It can be used in the same way as `SimpleDataSet`, but its output
 is RDF Turtle instead of JSON. `DCATDataSet` also requires certain keys be present in `registration_fields`.
 
 - description

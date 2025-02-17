@@ -1,6 +1,6 @@
 # Error Handling
 
-ia-map-lib will report any errors encountered within an Adaptor, Mapper, or Projector execution to a Kafka topic by default. 
+node-lib will report any errors encountered within an Adaptor, Mapper, or Projector execution to a Kafka topic by default. 
 
 It is possible at run-time to set headers to be included in all error messages and to access the error handler directly to provide fine-graining control over the behaviour of the application, for example, allowing execution to continue is an error is encountered with a specific record.
 

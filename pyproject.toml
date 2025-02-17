@@ -3,7 +3,7 @@ requires = ["setuptools>=61.2.0", "wheel==0.45.1", "pip-tools==7.4.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ia-map-lib"
+name = "node-lib"
 version = "3.1.1"
 authors = [{name = "National Digital Twin Programme"}]
 description = "A helper package for building Adapters, Mappers and Projectors for Integration Architecture Node"
@@ -90,7 +90,7 @@ exclude = [
 line-length = 120
 
 [project.urls]
-Repository = "https://github.com/National-Digital-Twin/ia-map-lib"
+Repository = "https://github.com/National-Digital-Twin/node-lib"
 
 [tool.distutils.bdist_wheel]
 universal = true
