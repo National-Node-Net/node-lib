@@ -27,16 +27,16 @@ limitations under the License.
 """
 
 
-class CoreLogFormats:
+class LogFormats:
     BASIC = ['name', 'levelname', 'msg', 'created']
-    CORE = ['name', 'log_type', 'levelname', 'msg', 'created']
+    EXTENDED = ['name', 'log_type', 'levelname', 'msg', 'created']
 
 
 MERGE = 0
 REPLACE = 1
 
 
-class CoreLoggerAdapter(logging.LoggerAdapter):
+class LoggerAdaptor(logging.LoggerAdapter):
 
     def __init__(self, logger: logging.Logger, headers: dict = None,
                  log_type: str = None, extra: dict = None, header_method: int = MERGE):
@@ -106,7 +106,7 @@ class JSONFormatter(logging.Formatter):
         del style, validate, defaults  # Unused
         self.datefmt = datefmt
         if fmt is None:
-            self.fmt = CoreLogFormats.BASIC
+            self.fmt = LogFormats.BASIC
         else:
             self.fmt = fmt
 
@@ -120,25 +120,25 @@ class JSONFormatter(logging.Formatter):
         return json.dumps(log_dict)
 
 
-class CoreLoggerFactory:
+class LoggerFactory:
 
     @staticmethod
     def get_logger(
             name: str, kafka_config: dict | None = None, topic: str = 'log', level: int = logging.INFO,
             fmt: list | None = None, headers: dict | None = None, log_type: str | None = None,
             header_method: int = MERGE
-    ) -> CoreLoggerAdapter:
+    ) -> LoggerAdaptor:
 
         logger = logging.getLogger(name)
         logger.setLevel(level)
 
         handler = KafkaHandler(kafka_config, topic, level)
         if fmt is None:
-            fmt = CoreLogFormats.CORE
+            fmt = LogFormats.EXTENDED
 
         handler.setFormatter(JSONFormatter(fmt))
 
         logger.addHandler(handler)
-        core_logger = CoreLoggerAdapter(logger, headers=headers, log_type=log_type, header_method=header_method)
+        loggerAdaptor = LoggerAdaptor(logger, headers=headers, log_type=log_type, header_method=header_method)
 
-        return core_logger
+        return loggerAdaptor

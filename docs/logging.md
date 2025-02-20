@@ -1,6 +1,6 @@
 # Logging
 
-node-lib provides a flexible handler, formatter, and Adapter that integrates with Python's standard logging features giving users a fine-grained control to log messages from their applications to core.
+node-lib provides a flexible handler, formatter, and Adapter that integrates with Python's standard logging features giving users a fine-grained control to log messages.
 
 For users who want an efficient way to send logs from their applications to Kafka, a factory is provided to initialise a logger with defaults that can be overriden on-demand.
 
@@ -35,19 +35,19 @@ In addition to the standard `logging.Formatter` parameters, `JSONFormatter` acce
 fmt
     : *Default: ['name', 'levelname', 'msg', 'created']*, specifies which values of a log record's dictionary to include in the message
 
-`fmt` must be provided as a list of keys to be included from the Python log entry dict. It supports additional keys added to log entries with extra. If `CoreLoggerAdaptor` is used, `headers` and `log_type` will also be available as format keys automatically. 
+`fmt` must be provided as a list of keys to be included from the Python log entry dict. It supports additional keys added to log entries with extra. If `LoggerAdaptor` is used, `headers` and `log_type` will also be available as format keys automatically. 
 
 It is recommended not to include `headers` in the message itself when using with the `KafkaHandler` as this handler will automatically send the headers as Kafka message headers. You may still include them though, and if you are using the `JSONFormatter` with a different handler (e.g. local debugging with Python's standard `StreamHandler`) then it might be useful to include the headers in the message.
 
 
 
-## Core Logger Adaptor
+## Logger Adaptor
 
 node-lib provides an adaptor to apply `headers` and `log_type` to all log entries as additional parameters instead of being supplied through `extra`. 
 If default values are provided to the Adaptor these will be applied to all entries, however individual log entries may also specify their own values as parameters. 
 
 
-### `ia_map_lib.logging.CoreLoggerAdaptor`
+### `ia_map_lib.logging.LoggerAdaptor`
 
 headers
     : *Default: {}*, specifies the default headers to apply to all log messages.
@@ -60,13 +60,13 @@ header_method
 
 
 
-## Core Logger Factory
+## Logger Factory
 
 Python logging is highly flexible, and whilst each of the provided classes by node-lib can be used and configured much like the classes provided in Python's standard logging library, node-lib also provides a logger factory that will configure a logger that is applicable to most use-cases of node-lib.
-The factory provides a logger with the `KafkaHandler`, `JSONFormatter` and `CoreLoggerAdaptor` configured, but each of their parameters can be overriden on initialisation. 
+The factory provides a logger with the `KafkaHandler`, `JSONFormatter` and `LoggerAdaptor` configured, but each of their parameters can be overriden on initialisation. 
 
 
-### `ia_map_lib.logging.CoreLoggerFactory`
+### `ia_map_lib.logging.LoggerFactory`
 
 broker
     : *Required*, the broker instance to write logs to
@@ -115,10 +115,10 @@ The logger factory can be customised as follows:
 
 ```python
 import uuid
-from ia_map_lib.logging import CoreLoggerFactory
+from ia_map_lib.logging import LoggerFactory
 
 
-logger = CoreLoggerFactory.get_logger(
+logger = LoggerFactory.get_logger(
     __name__, 
     broker="localhost:9092", 
     topic='audit_log', 
@@ -158,7 +158,7 @@ logging_config = {
             'level': logging.DEBUG,
             'stream': 'ext://sys.stdout'
         },
-        'core': {
+        'dataStream': {
             'class': 'ia_map_lib.logging.KafkaHandler',
             'level': logging.INFO,
             'formatter': 'json',
@@ -167,7 +167,7 @@ logging_config = {
     },
     "loggers": {
         "my_module": {
-            'handlers': ['core', 'console'],
+            'handlers': ['dataStream', 'console'],
             'level': logging.DEBUG
         }
     }
