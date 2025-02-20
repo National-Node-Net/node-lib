@@ -140,12 +140,12 @@ class SimpleDataSet(DataSet):
         return 'application/json'
 
     def registration_record(self, registration_fields: Mapping, headers: list[str | bytes | None] = None) -> Record:
-        registration_data = {
+        data = {
             'id': self.dataset_id,
             'title': self.title,
             'source_mime_type': self.source_mime_type
         }
-        record_data = {**registration_data, **registration_fields}
+        record_data = {**data, **registration_fields}
         return Record(headers, None, json.dumps(record_data), None)
 
     def update_record(self, headers: list[str | bytes | None] = None) -> Record:
