@@ -37,8 +37,8 @@ projector = Projector(source=DictionarySource(dict([(0, "ant"), (1, "aardvark"),
 projector.run()
 ```
 
-In real usage a projector function will typically process the record key and value and write some output to a Smart
-Cache for later consumption by applications.
+In real usage a projector function will typically process the record key and value and write some output to a Secure 
+Agent for later consumption by applications.
 
 
 [1]: https://en.wikipedia.org/wiki/Map_(higher-order_function)

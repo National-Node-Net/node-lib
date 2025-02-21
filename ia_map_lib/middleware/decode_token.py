@@ -5,7 +5,7 @@ import requests
 from werkzeug.wrappers import Request, Response
 
 from ia_map_lib.exceptions import ConfigurationException
-from ia_map_lib.logging import CoreLoggerFactory
+from ia_map_lib.logging import LoggerFactory
 
 __license__ = """
 Copyright (c) Telicent Ltd.
@@ -46,7 +46,7 @@ class AccessMiddleware:
             self.public_key_url = self.public_key_url.strip("/")
         self.jwt_header = jwt_header
         if logger is None:
-            self.logger = CoreLoggerFactory.get_logger(
+            self.logger = LoggerFactory.get_logger(
                 'Authenticator',
             )
         else:
