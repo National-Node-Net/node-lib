@@ -16,6 +16,7 @@ from ia_map_lib.sources.deserializers import DeserializerFunction, Deserializers
 from ia_map_lib.utils import check_kafka_broker_available, generate_group_id, validate_callable_protocol
 
 logger = logging.getLogger(__name__)
+AUTO_OFFSET_RESET_CONFIG = "auto.offset.reset"
 
 
 def __validate_kafka_deserializer__(instance, name):
@@ -130,9 +131,9 @@ class KafkaSource(DataSource):
 
         check_kafka_broker_available(kafka_config)
 
-        reset_position = kafka_config.get('auto.offset.reset')
+        reset_position = kafka_config.get(AUTO_OFFSET_RESET_CONFIG)
         if reset_position is None:
-            kafka_config['auto.offset.reset'] = 'earliest'
+            kafka_config[AUTO_OFFSET_RESET_CONFIG] = 'earliest'
 
         group_id = kafka_config.get('group.id')
         if group_id is None or len(group_id) == 0:
@@ -152,7 +153,7 @@ class KafkaSource(DataSource):
             kafka_config['enable.auto.commit'] = False
 
         self.broker = kafka_config['bootstrap.servers']
-        self.reset_position = kafka_config['auto.offset.reset']
+        self.reset_position = kafka_config[AUTO_OFFSET_RESET_CONFIG]
         self.needs_seek = False
 
         # Create the consumer

@@ -34,6 +34,8 @@ limitations under the License.
 
 
 logger = logging.getLogger(__name__)
+ITEM_TYPE = "item.type"
+RECORD = "record"
 
 
 def __calculate_elapsed__(start: float | None) -> float | None:
@@ -188,7 +190,7 @@ class Action:
     def __get_items_processed_rate__(self, options: CallbackOptions) -> Iterable[Observation]:
         total_elapsed = __calculate_elapsed__(self.processed_metric_timer)
         observation = Observation(
-            __calculate_rate__(self.processed_metric_counter, total_elapsed), {"item.type": "record"}
+            __calculate_rate__(self.processed_metric_counter, total_elapsed), {ITEM_TYPE: RECORD}
         )
         self.processed_metric_timer = time.perf_counter()
         self.processed_metric_counter = 0
@@ -197,14 +199,14 @@ class Action:
     def __get_items_output_rate__(self, options: CallbackOptions) -> Iterable[Observation]:
         total_elapsed = __calculate_elapsed__(self.output_metric_timer)
         observation = Observation(
-            __calculate_rate__(self.output_metric_counter, total_elapsed), {"item.type": "record"}
+            __calculate_rate__(self.output_metric_counter, total_elapsed), {ITEM_TYPE: RECORD}
         )
         self.output_metric_timer = time.perf_counter()
         self.output_metric_counter = 0
         return [observation]
 
     def __get_errors__(self, options: CallbackOptions) -> Iterable[Observation]:
-        return [Observation(self.error_count, {"item.type": "record"})]
+        return [Observation(self.error_count, {ITEM_TYPE: RECORD})]
 
     def reporter_kwargs(self):
         raise NotImplementedError()

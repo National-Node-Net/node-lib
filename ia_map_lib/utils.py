@@ -92,9 +92,6 @@ def validate_callable_protocol(function: Any, protocol: Any) -> None:
     if callable(protocol):
         sig_inspection = protocol.__call__
     required_signature = inspect.signature(sig_inspection)  # type: ignore
-    if required_signature is None:
-        raise TypeError(f"{protocol} is not a protocol whose validity can be checked")
-
     has_self = False
     adj = 0
     for i, parameter_tuple in enumerate(required_signature.parameters.items()):

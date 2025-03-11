@@ -48,7 +48,8 @@ def __compare_rdf_graphs__(a: Any, b: Any) -> bool:
     else:
         b_iso = to_isomorphic(b.get_context(identifier=DATASET_DEFAULT_GRAPH_ID))  # next(b.contexts()))
 
-    # For debugging if tests aren't producing the expected results
+"""
+    For debugging if tests aren't producing the expected results
     if False:
         print("A:")
         print(a_iso.serialize(destination=None, encoding=None, format="nt11"))
@@ -60,7 +61,7 @@ def __compare_rdf_graphs__(a: Any, b: Any) -> bool:
             for _, ctx in enumerate(b.contexts()):
                 print(ctx.identifier)
         print(b_iso.serialize(destination=None, encoding=None, format="nt11"))
-
+"""
     return a_iso == b_iso
 
 

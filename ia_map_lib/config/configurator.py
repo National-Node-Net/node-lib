@@ -112,10 +112,11 @@ class Configurator:
             logger.debug(f"Raw Value for Configuration Key {config_key} is {raw_value}")
 
         if raw_value is None:
+          if default is not None:
             raw_value = default
-            if self.debug and default is not None:
+            if self.debug:
                 logger.debug(f"Using default value {default}")
-            if raw_value is None and required:
+            if required:
                 self.__handle_errors__(f"Required Configuration Key {config_key} is not set.  {description}", on_error)
 
         if converter is not None:
@@ -130,12 +131,11 @@ class Configurator:
         else:
             value = raw_value
 
-        if required_type is not None:
-            if not isinstance(value, required_type):
-                self.__handle_errors__(
-                    f"Configuration Key {config_key} has typed value {value} of type {type(value)}"
-                    "which is not of the desired type {required_type}",
-                    on_error)
+        if required_type is not None and not isinstance(value, required_type):
+            self.__handle_errors__(
+                f"Configuration Key {config_key} has typed value {value} of type {type(value)}"
+                "which is not of the desired type {required_type}",
+                on_error)
 
         return value
 
