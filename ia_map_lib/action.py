@@ -279,9 +279,9 @@ class Action:
         If caller is using the `run()` method then this will be called automatically.
         """
         if self.batch_timer is not None:
-            raise Exception('Action has already been started')
+            raise ValueError('Action has already been started')
         if self.total_timer is not None:
-            raise Exception('Action has already been started')
+            raise ValueError('Action has already been started')
 
         self.total_timer = time.perf_counter()
         self.batch_timer = self.total_timer
@@ -325,9 +325,9 @@ class Action:
             self.counter += 1
             self.processed_metric_counter += 1
             tracer_span.set_attribute("action.counter", self.counter)
-            if self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0:
-                self.report_progress()
-            elif self.counter > self.next_batch_boundary:
+            if (
+                self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0
+            ) or self.counter > self.next_batch_boundary:
                 self.report_progress()
 
     def record_read(self) -> None:
@@ -357,9 +357,9 @@ class Action:
         :param count: Number of records processed
         """
         self.counter += count
-        if self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0:
-            self.report_progress()
-        elif self.counter > self.next_batch_boundary:
+        if (
+            self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0
+        ) or self.counter > self.next_batch_boundary:
             self.report_progress()
 
     def report_progress(self) -> None:
@@ -417,7 +417,7 @@ class Action:
         If the caller is using the `run()` method then this will be called automatically.
         """
         if self.batch_timer is None:
-            raise Exception('Action has not been started')
+            raise ValueError('Action has not been started')
 
         # If we did not finish exactly on a reporting batch size report the stats for the final batch
         if self.counter % self.reporting_batch_size != 0:
