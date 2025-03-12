@@ -14,7 +14,7 @@ Please see [confluent-kafka's compatability documentation](https://docs.confluen
 ## Installation
 
 ```shell
-pip install telicent-lib
+pip install node-lib
 ```
 
 ## Usage
