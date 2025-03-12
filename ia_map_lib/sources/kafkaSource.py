@@ -220,14 +220,9 @@ class KafkaSource(DataSource):
                 # going on with the KafkaConsumer we could be assigned partitions and start reading from them prior
                 # to having the opportunity to seek to our desired position.  If we do seek we do a fresh read so
                 # that we get the correct record, otherwise we could return an incorrect record
-                logger.debug(f"Seeking based on reset_position={self.reset_position}")
-                if self.reset_position == 'beginning':
-                    self.__seek_to_beginning__()
-                    record = self.consumer.poll(timeout=1.0)
-                elif self.reset_position == 'end':
-                    self.__seek_to_end__()
-                    record = self.consumer.poll(timeout=1.0)
+                record = self.__perform_seek__()
                 self.needs_seek = False
+
 
             # If we were needing a seek i.e. we'd just been assigned a partition, but didn't have to explicitly seek
             # then the record will be None, and we'll loop back round again to try reading the next record
@@ -235,10 +230,7 @@ class KafkaSource(DataSource):
                 continue
 
             if record.error() is not None:
-                if "UNKNOWN_TOPIC_OR_PART" in record.error().__str__():
-                    raise SourceNotFoundException(source_name=self.get_source_name())
-                else:
-                    raise RuntimeError(record.error())
+                self.__handle_record_errors__(record)
 
             self.last_offsets[TopicPartition(record.topic(), record.partition())] = record
 
@@ -253,6 +245,20 @@ class KafkaSource(DataSource):
                 value=self.value_deserializer(record.value()),
                 raw=record
             )
+
+    def __perform_seek__(self):
+        logger.debug(f"Seeking based on reset_position={self.reset_position}")
+        if self.reset_position == 'beginning':
+            self.__seek_to_beginning__()
+            return self.consumer.poll(timeout=1.0)
+        elif self.reset_position == 'end':
+            self.__seek_to_end__()
+            return self.consumer.poll(timeout=1.0)
+
+    def __handle_record_errors__(self, record):
+          if "UNKNOWN_TOPIC_OR_PART" in record.error().__str__():
+              raise SourceNotFoundException(source_name=self.get_source_name())
+          raise RuntimeError(record.error())
 
     def remaining(self) -> int | None:
         remaining = None

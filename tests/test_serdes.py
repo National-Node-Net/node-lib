@@ -39,30 +39,23 @@ def __compare_rdf_graphs__(a: Any, b: Any) -> bool:
                 return False
         return True
 
-    if not isinstance(a, Dataset):
-        a_iso = to_isomorphic(a)
-    else:
-        a_iso = to_isomorphic(a.get_context(identifier=DATASET_DEFAULT_GRAPH_ID))  # next(a.contexts()))
-    if not isinstance(b, Dataset):
-        b_iso = to_isomorphic(b)
-    else:
-        b_iso = to_isomorphic(b.get_context(identifier=DATASET_DEFAULT_GRAPH_ID))  # next(b.contexts()))
-
-"""
-    For debugging if tests aren't producing the expected results
-    if False:
-        print("A:")
-        print(a_iso.serialize(destination=None, encoding=None, format="nt11"))
-        print()
-        print("B:")
-        if isinstance(b, Dataset):
-            print("Full Dataset:")
-            print(b.serialize(destination=None, encoding=None, format="nquads"))
-            for _, ctx in enumerate(b.contexts()):
-                print(ctx.identifier)
-        print(b_iso.serialize(destination=None, encoding=None, format="nt11"))
-"""
-    return a_iso == b_iso
+    def to_iso(graph):
+        return to_isomorphic(graph) if not isinstance(graph, Dataset) else to_isomorphic(
+            graph.get_context(identifier=DATASET_DEFAULT_GRAPH_ID)
+        )
+#     For debugging if tests aren't producing the expected results
+#     if False:
+#         print("A:")
+#         print(a_iso.serialize(destination=None, encoding=None, format="nt11"))
+#         print()
+#         print("B:")
+#         if isinstance(b, Dataset):
+#             print("Full Dataset:")
+#             print(b.serialize(destination=None, encoding=None, format="nquads"))
+#             for _, ctx in enumerate(b.contexts()):
+#                 print(ctx.identifier)
+#         print(b_iso.serialize(destination=None, encoding=None, format="nt11"))
+    return to_iso(a) == to_iso(b)
 
 
 class ExtendedSerializerFunction(SerializerFunction):
@@ -247,24 +240,14 @@ class TestSerdes(unittest.TestCase):
                 self.assertTrue(inspect.ismethod(serializer) or inspect.isfunction(serializer))
                 self.assertTrue(inspect.ismethod(deserializer) or inspect.isfunction(deserializer))
 
-        self.assertTrue(isinstance(RdfSerializer(), Serializer))
-        self.assertTrue(isinstance(RdfDeserializer(), Deserializer))
+        self.assertIsInstance(RdfSerializer(), Serializer)
+        self.assertIsInstance(RdfDeserializer(), Deserializer)
         self.assertFalse(inspect.ismethod(RdfSerializer) and inspect.isfunction(RdfSerializer))
         self.assertFalse(inspect.ismethod(RdfDeserializer) and inspect.isfunction(RdfDeserializer))
 
     def test_serdes_validation_02(self):
         self.assertFalse(inspect.ismethod(ExtendedSerializerFunction) or inspect.isfunction(ExtendedSerializerFunction))
-        self.assertTrue(isinstance(ExtendedSerializerFunction, SerializerFunction))
-
-        with self.assertRaises(expected_exception=KafkaException):
-            KafkaSink(
-                topic="test", kafka_config={'bootstrap.servers': 'localhost:12345'},
-                key_serializer=ExtendedSerializerFunction, value_serializer=ExtendedSerializerFunction
-            )
-
-    def test_serdes_validation_03(self):
-        self.assertFalse(inspect.ismethod(ExtendedSerializerFunction) or inspect.isfunction(ExtendedSerializerFunction))
-        self.assertTrue(isinstance(ExtendedSerializerFunction, SerializerFunction))
+        self.assertIsInstance(ExtendedSerializerFunction, SerializerFunction)
 
         with self.assertRaises(expected_exception=KafkaException):
             KafkaSink(topic="test",
@@ -272,9 +255,9 @@ class TestSerdes(unittest.TestCase):
                       key_serializer=ExtendedSerializerFunction,
                       value_serializer=ExtendedSerializerFunction)
 
-    def test_serdes_validation_04(self):
+    def test_serdes_validation_03(self):
         self.assertFalse(inspect.ismethod(ExtendedSerializerFunction) or inspect.isfunction(ExtendedSerializerFunction))
-        self.assertTrue(isinstance(ExtendedSerializerFunction, SerializerFunction))
+        self.assertIsInstance(ExtendedSerializerFunction, SerializerFunction)
 
         with self.assertRaises(expected_exception=KafkaException):
             KafkaSource(topic="test",
@@ -284,7 +267,7 @@ class TestSerdes(unittest.TestCase):
 
     def test_serdes_validation_05(self):
         self.assertFalse(inspect.ismethod(ExtendedSerializerFunction) or inspect.isfunction(ExtendedSerializerFunction))
-        self.assertTrue(isinstance(ExtendedSerializerFunction, SerializerFunction))
+        self.assertIsInstance(ExtendedSerializerFunction, SerializerFunction)
 
         with self.assertRaises(expected_exception=KafkaException):
             KafkaSource(topic="test",

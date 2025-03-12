@@ -111,8 +111,7 @@ class Configurator:
         if self.debug:
             logger.debug(f"Raw Value for Configuration Key {config_key} is {raw_value}")
 
-        if raw_value is None:
-          if default is not None:
+        if raw_value is None and default is not None:
             raw_value = default
             if self.debug:
                 logger.debug(f"Using default value {default}")
