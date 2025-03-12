@@ -33,6 +33,8 @@ Record.key.__doc__ = "The key of the record, may be None if no key."
 Record.value.__doc__ = "The value of the record, may be None if no value."
 Record.raw.__doc__ = "Provides access to the raw record type used internally by the data source, may be useful in " \
                      "some advanced use cases. "
+NO_RECORD_ERROR = "No record provided"
+NO_HEADER_KEY_ERROR = "No header key provided"
 
 
 @runtime_checkable
@@ -184,9 +186,9 @@ class RecordUtils:
         :raises ValueError: If no record/header key is provided
         """
         if record is None:
-            raise ValueError("No record provided")
+            raise ValueError(NO_RECORD_ERROR)
         elif header is None:
-            raise ValueError("No header key provided")
+            raise ValueError(NO_HEADER_KEY_ERROR)
 
         new_headers = []
         if record.headers is not None:
@@ -206,7 +208,7 @@ class RecordUtils:
         :return: New record with the headers added
         """
         if record is None:
-            raise ValueError("No record provided")
+            raise ValueError(NO_RECORD_ERROR)
         elif headers is None:
             raise ValueError("No new headers provided")
         elif not isinstance(headers, list):
@@ -236,9 +238,9 @@ class RecordUtils:
         :return: New record with the header replaced or added
         """
         if record is None:
-            raise ValueError("No record provided")
+            raise ValueError(NO_RECORD_ERROR)
         elif header is None:
-            raise ValueError("No header key provided")
+            raise ValueError(NO_HEADER_KEY_ERROR)
         header = header.casefold()
 
         new_headers = []
@@ -270,9 +272,9 @@ class RecordUtils:
         :raises ValueError: If no record/header key is provided
         """
         if record is None:
-            raise ValueError("No record provided")
+            raise ValueError(NO_RECORD_ERROR)
         elif header is None:
-            raise ValueError("No header key provided")
+            raise ValueError(NO_HEADER_KEY_ERROR)
 
         if record.headers is None:
             return record

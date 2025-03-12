@@ -33,7 +33,7 @@ def not_an_adder(a: int, b: int, c: bool) -> int:
 @runtime_checkable
 class Adder(Protocol):
     def __call__(self, x: int, y: int) -> int:
-        pass
+        pass # This function is intentionally left empty as part of the test setup.
 
 
 class UsableAdder(Adder):

@@ -8,7 +8,7 @@ from tests.test_records import RecordVerifier
 
 
 def __noop_projector__(record: Record) -> None:
-    pass
+    pass # This function is intentionally left empty as part of the test setup.
 
 
 def __fail_projector__(record: Record) -> None:

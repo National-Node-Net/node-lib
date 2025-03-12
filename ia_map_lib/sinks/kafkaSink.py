@@ -145,14 +145,7 @@ class KafkaSink(DataSink):
         # Note that this is not an in-depth check of the headers since KafkaProducer will do a more detailed validation
         # of them when we try to send the record
         if record.headers is not None:
-            if isinstance(record.headers, list):
-                for i, header in enumerate(record.headers):
-                    key, value = header
-                    if not isinstance(value, bytes):
-                        if isinstance(value, str):
-                            record.headers[i] = (key, value.encode("utf-8"))
-                        else:
-                            raise TypeError("Record headers must be tuples where the value is given as bytes or a str")
+          record.headers = normalize_headers(record.headers)
 
         key = self.key_serializer(record.key)
         value = self.value_serializer(record.value)
@@ -168,6 +161,17 @@ class KafkaSink(DataSink):
             except BufferError:
                 logger.debug('Waiting for buffer to clear')
                 self.target.poll(1)
+
+    def _normalize_headers(self, headers):
+        if isinstance(headers, list):
+            for i, header in enumerate(headers):
+                key, value = header
+                if not isinstance(value, bytes):
+                    if isinstance(value, str):
+                        headers[i] = (key, value.encode("utf-8"))
+                    else:
+                        raise TypeError("Record headers must be tuples where the value is given as bytes or a str")
+            return headers
 
     def close(self):
         self.target.flush()

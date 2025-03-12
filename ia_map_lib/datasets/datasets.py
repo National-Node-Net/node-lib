@@ -39,7 +39,8 @@ class DCATDataSet(DataSet):
 
     def __init__(self, dataset_id: str, title: str, source_mime_type: str):
         super().__init__(dataset_id, title, source_mime_type)
-        self.tcat = 'http://ndtp.co.uk/catalog#'
+        # url gives 'Page not found'
+        self.tcat = 'https://ndtp.co.uk/catalog#'
         self.dataset_id_dataset = URIRef(f'{self.tcat}{self.dataset_id}_dataset')
         self.dataset_id_distribution = URIRef(f'{self.tcat}{self.dataset_id}_distribution')
 
@@ -79,7 +80,8 @@ class DCATDataSet(DataSet):
         g.add((
             qualified_attribution_bnode,
             URIRef(f'{DCAT}hadRole'),
-            URIRef('http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode/owner')
+            # url is broken
+            URIRef('https://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode/owner')
         ))
 
         rights_bnode = BNode()
@@ -103,7 +105,7 @@ class DCATDataSet(DataSet):
         g.add((
             self.dataset_id_distribution,
             URIRef(f'{DCAT}mediaType'),
-            URIRef(f'http://www.iana.org/assignments/media-types/{self.source_mime_type}')
+            URIRef(f'https://www.iana.org/assignments/media-types/{self.source_mime_type}')
         ))
 
         g.add((

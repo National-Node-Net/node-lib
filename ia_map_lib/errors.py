@@ -126,6 +126,3 @@ class PrintErrorHandler(ErrorHandler):
 
     def __send_record__(self, record: Record):
         print(str(record))
-
-    def close(self):
-        pass
