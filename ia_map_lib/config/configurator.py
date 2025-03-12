@@ -111,22 +111,15 @@ class Configurator:
         if self.debug:
             logger.debug(f"Raw Value for Configuration Key {config_key} is {raw_value}")
 
-        if raw_value is None and default is not None:
+        if raw_value is None:
             raw_value = default
-            if self.debug:
+            if self.debug and default is not None:
                 logger.debug(f"Using default value {default}")
-            if required:
+            if raw_value is None and required:
                 self.__handle_errors__(f"Required Configuration Key {config_key} is not set.  {description}", on_error)
 
         if converter is not None:
-            try:
-                value = converter(raw_value)
-                if self.debug:
-                    logger.debug(f"Converted raw value {raw_value} into typed value {value} with type {type(value)}")
-            except Exception as e:
-                self.__handle_errors__(
-                    f"Configuration Key {config_key} has raw value {raw_value} that failed value conversion: {e}",
-                    on_error)
+            value = self._convert_value(config_key, raw_value, converter, on_error)
         else:
             value = raw_value
 
@@ -137,6 +130,16 @@ class Configurator:
                 on_error)
 
         return value
+
+    def _convert_value(self, config_key: str, raw_value: Any, converter: Callable[[str], Any], on_error: OnError) -> Any:
+        try:
+            if self.debug:
+                logger.debug(f"Converted raw value {raw_value} into typed value {value} with type {type(value)}")
+            return converter(raw_value)
+        except Exception as e:
+            self.__handle_errors__(
+                f"Configuration Key {config_key} has raw value {raw_value} that failed value conversion: {e}", on_error)
+            return None
 
     def __handle_errors__(self, message: str, on_error: OnError):
         """

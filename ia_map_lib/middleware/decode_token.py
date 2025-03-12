@@ -73,7 +73,7 @@ class AccessMiddleware:
 
     def validate_token(self, token):
         try:
-            headers = jwt.get_unverified_header(token) #NOSONAR
+            headers = jwt.get_unverified_header(token) #NOSONAR python:S5659
             if self.jwks_url is not None:
                 self.logger.debug("Validating token with jwks_url", log_type="GENERAL")
                 jwks_client = jwt.PyJWKClient(self.jwks_url)

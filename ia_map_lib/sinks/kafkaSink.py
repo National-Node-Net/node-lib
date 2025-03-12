@@ -162,7 +162,7 @@ class KafkaSink(DataSink):
                 logger.debug('Waiting for buffer to clear')
                 self.target.poll(1)
 
-    def normalize_headers(self, headers):
+    def _normalize_headers(self, headers):
         if isinstance(headers, list):
             for i, header in enumerate(headers):
                 key, value = header
