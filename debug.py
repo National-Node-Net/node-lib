@@ -72,11 +72,11 @@ def action_test(iterations: int = 1500, with_abort: bool = True):
     i = 0
     try:
         while i < iterations:
-            action.records_processed(random.randint(100, 1000))
+            action.records_processed(random.randint(100, 1000)) #NOSONAR python:S2245
             time.sleep(random.uniform(0.001, 0.05))
             i += 1
 
-            if with_abort and random.randint(0, 1000) > 999:
+            if with_abort and random.randint(0, 1000) > 999: #NOSONAR python:S2245
                 action.aborted()
                 exit(1)
 

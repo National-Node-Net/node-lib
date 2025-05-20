@@ -3,127 +3,101 @@
 ### Changed
 - Updated MAINTAINERS.md with updated supplier information.
 
-## [3.1.1](https://github.com/telicent-oss/telicent-lib/compare/v3.1.0...v3.1.1) (2024-10-28)
+**Repository:** `node-lib`  
+**Description:** `Tracks all notable changes, version history, and roadmap toward 1.0.0 following Semantic Versioning.`  
+<!-- SPDX-License-Identifier: OGL-UK-3.0 -->
 
+All notable changes to this repository will be documented in this file.  
 
-### Bug Fixes
+This project follows **Semantic Versioning (SemVer)** ([semver.org](https://semver.org/)), using the format: 
 
-* **kafka-source:** prevent clashing groupids when one not provided ([#55](https://github.com/telicent-oss/telicent-lib/issues/55)) ([675dbe7](https://github.com/telicent-oss/telicent-lib/commit/675dbe7d74bab3381afde629a7bd33670188f370))
+`[MAJOR].[MINOR].[PATCH]`
+- **MAJOR** (`X.0.0`) – Incompatible API/feature changes that break backward compatibility.
+- **MINOR** (`0.X.0`) – Backward-compatible new features, enhancements, or functionality changes.
+- **PATCH** (`0.0.X`) – Backward-compatible bug fixes, security updates, or minor corrections.
+- **Pre-release versions** – Use suffixes such as `-alpha`, `-beta`, `-rc.1` (e.g., `2.1.0-beta.1`).
+- **Build metadata** – If needed, use `+build` (e.g., `2.1.0+20250314`).
 
-## [3.1.0](https://github.com/telicent-oss/telicent-lib/compare/v3.0.1...v3.1.0) (2024-10-22)
+---
 
+## [Unreleased]
 
-### Features
+### Added
+- Placeholder for upcoming features and enhancements.
 
-* file based config for Kafka ([#53](https://github.com/telicent-oss/telicent-lib/issues/53)) ([1a26dc7](https://github.com/telicent-oss/telicent-lib/commit/1a26dc7df450a116035d2e04f26b6f6eb87f3901))
+### Fixed
+- Placeholder for bug fixes and security updates.
 
-## [3.0.1](https://github.com/telicent-oss/telicent-lib/compare/v3.0.0...v3.0.1) (2024-09-25)
+### Changed
+- Placeholder for changes to existing functionality.
 
+---
 
-### Bug Fixes
+## 0.90.0 – 2025-03-31
 
-* headers being set on data catalog messages ([#48](https://github.com/telicent-oss/telicent-lib/issues/48)) ([e4f2199](https://github.com/telicent-oss/telicent-lib/commit/e4f2199a9edcd556b9612b8422a87682656a9bab))
+### Initial Public Release (Pre-Stable)
 
-## [3.0.0](https://github.com/telicent-oss/telicent-lib/compare/v2.2.1...v3.0.0) (2024-09-19)
+This is the first public release of this repository under NDTP's open-source governance model.  
+Since this release is **pre-1.0.0**, changes may still occur that are **not fully backward-compatible**.
 
+#### Initial Features
+- Key functionality (in Python) for validation and transformation of data in a data pipeline for data ingestion by a secure-agent-graph instance.
 
-### ⚠ BREAKING CHANGES
+#### Known Limitations
+- Some components are subject to change before `1.0.0`.
+- APIs may evolve based on partner feedback and internal testing.
 
-* Dataset objects used to provide additional meta data about a dataset to adapters ([#46](https://github.com/telicent-oss/telicent-lib/issues/46))
+---
 
-### Features
+## [0.90.1] – YYYY-MM-DD
 
-* Dataset objects used to provide additional meta data about a dataset to adapters ([#46](https://github.com/telicent-oss/telicent-lib/issues/46)) ([d6817cd](https://github.com/telicent-oss/telicent-lib/commit/d6817cd791cfb02f9bd3458924b44c3c3113799d))
+### Fixed
+- Security patch addressing [issue].
+- Minor bug fix in [module].
 
-## [2.2.1](https://github.com/telicent-oss/telicent-lib/compare/v2.2.0...v2.2.1) (2024-09-04)
+---
 
+## [0.91.0] – YYYY-MM-DD
 
-### Bug Fixes
+### Added
+- New feature: [Feature name].
 
-* changed catalogue to catalog and updated dc default topic ([#44](https://github.com/telicent-oss/telicent-lib/issues/44)) ([c8825b3](https://github.com/telicent-oss/telicent-lib/commit/c8825b3d502a778f4d2729fc0e95e41b15ccd4e6))
+### Changed
+- Adjusted API contracts for [component].
 
-## [2.2.0](https://github.com/telicent-oss/telicent-lib/compare/v2.1.0...v2.2.0) (2024-09-03)
+---
 
+## Future Roadmap to `1.0.0`
 
-### Features
+The `0.90.x` series is part of NDTP’s **pre-stable development cycle**, meaning:
+- **Minor versions (`0.91.0`, `0.92.0`...) introduce features and improvements** leading to a stable `1.0.0`.
+- **Patch versions (`0.90.1`, `0.90.2`...) contain only bug fixes and security updates**.
+- **Backward compatibility is NOT guaranteed until `1.0.0`**, though NDTP aims to minimise breaking changes.
 
-* data source update notifications can be sent to a specified sink ([#41](https://github.com/telicent-oss/telicent-lib/issues/41)) ([d7987fb](https://github.com/telicent-oss/telicent-lib/commit/d7987fba9393bbc8ae6fe730a87cef5da9e24fb2))
-* security labels from input record persisted to output record in mappers ([#42](https://github.com/telicent-oss/telicent-lib/issues/42)) ([98cc604](https://github.com/telicent-oss/telicent-lib/commit/98cc604613ddbeb115ed4ce8b5d4c8b800dd2c24))
+Once `1.0.0` is reached, future versions will follow **strict SemVer rules**.
 
-## [2.1.0](https://github.com/telicent-oss/telicent-lib/compare/v2.0.7...v2.1.0) (2024-08-15)
+---
 
+## Versioning Policy
 
-### Features
+1. **MAJOR updates (`X.0.0`)** – Typically introduce breaking changes that require users to modify their code or configurations.
+  - **Breaking changes (default rule)**: Any backward-incompatible modifications require a major version bump.
+  - **Non-breaking major updates (exceptional cases)**: A major version may also be incremented if the update represents a significant milestone, such as a shift in governance, a long-term stability commitment, or substantial new functionality that redefines the project’s scope.
+2. **MINOR updates (`0.X.0`)** – New functionality that is backward-compatible.
+3. **PATCH updates (`0.0.X`)** – Bug fixes, performance improvements, or security patches.
+4. **Dependency updates** – A **major dependency upgrade** that introduces breaking changes should trigger a **MAJOR** version bump (once at `1.0.0`).
 
-* added source headers ([#36](https://github.com/telicent-oss/telicent-lib/issues/36)) ([1f0c60f](https://github.com/telicent-oss/telicent-lib/commit/1f0c60f5cb45848668ca1469d81f4390118a91d3))
+---
 
-## [2.0.7](https://github.com/telicent-oss/telicent-lib/compare/v2.0.6...v2.0.7) (2024-08-14)
+## How to Update This Changelog
+1. When making changes, update this file under the **Unreleased** section.
+2. Before a new release, move changes from **Unreleased** to a new dated section with a version number.
+3. Follow **Semantic Versioning** rules to categorise changes correctly.
+4. If pre-release versions are used, clearly mark them as `-alpha`, `-beta`, or `-rc.X`.
 
+---
+**Maintained by the National Digital Twin Programme (NDTP).**  
 
-### Bug Fixes
-
-* allow full install on Python 3.9 ([#38](https://github.com/telicent-oss/telicent-lib/issues/38)) ([f176f56](https://github.com/telicent-oss/telicent-lib/commit/f176f56618ce0af7b7775a77b599885ba92801a8))
-
-## [2.0.6](https://github.com/telicent-oss/telicent-lib/compare/v2.0.5...v2.0.6) (2024-08-14)
-
-
-### Miscellaneous
-
-* limited support for python 3.9 ([#35](https://github.com/telicent-oss/telicent-lib/issues/35)) ([0868e99](https://github.com/telicent-oss/telicent-lib/commit/0868e99efacf41452fc6b0e7874a7b4c91580299))
-
-## [2.0.5](https://github.com/telicent-oss/telicent-lib/compare/v2.0.4...v2.0.5) (2024-07-09)
-
-
-### Bug Fixes
-
-* handled topic not found exception ([#29](https://github.com/telicent-oss/telicent-lib/issues/29)) ([55b7a84](https://github.com/telicent-oss/telicent-lib/commit/55b7a848785fa4a24cd420ada397d55fd860a317))
-
-
-### Miscellaneous
-
-* pr scanning and updated ruff checks to py310 ([#28](https://github.com/telicent-oss/telicent-lib/issues/28)) ([0c88188](https://github.com/telicent-oss/telicent-lib/commit/0c88188a6593309a9ddb627e3cab4b943efa950f))
-* update requests dependency add urllib3 to override older version provided by types-requests ([#34](https://github.com/telicent-oss/telicent-lib/issues/34)) ([c5bbb25](https://github.com/telicent-oss/telicent-lib/commit/c5bbb25f0948bdefbf38e94a8771341444e5743c))
-
-## [2.0.4](https://github.com/telicent-oss/telicent-lib/compare/v2.0.3...v2.0.4) (2024-06-27)
-
-
-### Miscellaneous
-
-* add types-pytz and types-python-dateutil to pre-commit config ([6f91762](https://github.com/telicent-oss/telicent-lib/commit/6f9176294b0ba2a96bc6ca540d061d6904f914fd))
-* Remove SecurityLabels funtionality - now a dependency ([#27](https://github.com/telicent-oss/telicent-lib/issues/27)) ([1924284](https://github.com/telicent-oss/telicent-lib/commit/19242843fa723b8262a0b7708a9a43ca4f5f5e63))
-* update repository url in pyproject ([2b534c2](https://github.com/telicent-oss/telicent-lib/commit/2b534c200a75542ab0c6094dc4a02e40f515dc58))
-
-## [2.0.3](https://github.com/telicent-oss/telicent-lib/compare/v2.0.2...v2.0.3) (2024-05-31)
-
-
-### Miscellaneous
-
-* changed to PEP 604 annotations ([#20](https://github.com/telicent-oss/telicent-lib/issues/20)) ([07c7afe](https://github.com/telicent-oss/telicent-lib/commit/07c7afe9d0f3cd6af3e18cde6751af6766772dd4))
-* switched to builtin types ([#25](https://github.com/telicent-oss/telicent-lib/issues/25)) ([8858dbc](https://github.com/telicent-oss/telicent-lib/commit/8858dbca8b634e9bcbdb4f955cdc2c0ed7b5fa68))
-
-## [2.0.2](https://github.com/telicent-oss/telicent-lib/compare/v2.0.1...v2.0.2) (2024-05-22)
-
-
-### Bug Fixes
-
-* moved jira-mapping-rules yaml ([#13](https://github.com/telicent-oss/telicent-lib/issues/13)) ([eb2c9d4](https://github.com/telicent-oss/telicent-lib/commit/eb2c9d42d4da521b0b72cbd5b78ccb77b24c485a))
-* updated werkzeug to 3.0.3 ([#17](https://github.com/telicent-oss/telicent-lib/issues/17)) ([a281a2c](https://github.com/telicent-oss/telicent-lib/commit/a281a2c8ef1429f89254c966ee4e81321dc4dfcd))
-
-
-### Miscellaneous
-
-* **configurator:** used logger rather than print statements ([#10](https://github.com/telicent-oss/telicent-lib/issues/10)) ([b33eb8e](https://github.com/telicent-oss/telicent-lib/commit/b33eb8e24589f14e8750b8e380bcc08dc413586e))
-
-## [2.0.1](https://github.com/telicent-oss/telicent-lib/compare/v2.0.0...v2.0.1) (2024-05-09)
-
-
-### Bug Fixes
-
-* projector and adapter reporter text, and decode token logger init ([#8](https://github.com/telicent-oss/telicent-lib/issues/8)) ([7f46762](https://github.com/telicent-oss/telicent-lib/commit/7f46762a57fb834f7366d2912af5c76d1fce27e0))
-
-## 2.0.0 (2024-05-01)
-
-
-### Features
-
-* initial release ([c605ee7](https://github.com/telicent-oss/telicent-lib/commit/c605ee76a5dea86585112620b4350855d527ccc5))
+© Crown Copyright 2025. This work has been developed by the National Digital Twin Programme and is legally attributed to the Department for Business and Trade (UK) as the governing entity.  
+Licensed under the Open Government Licence v3.0.  
+For full licensing terms, see [OGL_LICENSE.md](OGL_LICENSE.md). 

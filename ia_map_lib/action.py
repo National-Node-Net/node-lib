@@ -34,6 +34,8 @@ limitations under the License.
 
 
 logger = logging.getLogger(__name__)
+ITEM_TYPE = "item.type"
+RECORD = "record"
 
 
 def __calculate_elapsed__(start: float | None) -> float | None:
@@ -188,7 +190,7 @@ class Action:
     def __get_items_processed_rate__(self, options: CallbackOptions) -> Iterable[Observation]:
         total_elapsed = __calculate_elapsed__(self.processed_metric_timer)
         observation = Observation(
-            __calculate_rate__(self.processed_metric_counter, total_elapsed), {"item.type": "record"}
+            __calculate_rate__(self.processed_metric_counter, total_elapsed), {ITEM_TYPE: RECORD}
         )
         self.processed_metric_timer = time.perf_counter()
         self.processed_metric_counter = 0
@@ -197,14 +199,14 @@ class Action:
     def __get_items_output_rate__(self, options: CallbackOptions) -> Iterable[Observation]:
         total_elapsed = __calculate_elapsed__(self.output_metric_timer)
         observation = Observation(
-            __calculate_rate__(self.output_metric_counter, total_elapsed), {"item.type": "record"}
+            __calculate_rate__(self.output_metric_counter, total_elapsed), {ITEM_TYPE: RECORD}
         )
         self.output_metric_timer = time.perf_counter()
         self.output_metric_counter = 0
         return [observation]
 
     def __get_errors__(self, options: CallbackOptions) -> Iterable[Observation]:
-        return [Observation(self.error_count, {"item.type": "record"})]
+        return [Observation(self.error_count, {ITEM_TYPE: RECORD})]
 
     def reporter_kwargs(self):
         raise NotImplementedError()
@@ -277,9 +279,9 @@ class Action:
         If caller is using the `run()` method then this will be called automatically.
         """
         if self.batch_timer is not None:
-            raise Exception('Action has already been started')
+            raise ValueError('Action has already been started')
         if self.total_timer is not None:
-            raise Exception('Action has already been started')
+            raise ValueError('Action has already been started')
 
         self.total_timer = time.perf_counter()
         self.batch_timer = self.total_timer
@@ -323,9 +325,9 @@ class Action:
             self.counter += 1
             self.processed_metric_counter += 1
             tracer_span.set_attribute("action.counter", self.counter)
-            if self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0:
-                self.report_progress()
-            elif self.counter > self.next_batch_boundary:
+            if (
+                self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0
+            ) or self.counter > self.next_batch_boundary:
                 self.report_progress()
 
     def record_read(self) -> None:
@@ -355,9 +357,9 @@ class Action:
         :param count: Number of records processed
         """
         self.counter += count
-        if self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0:
-            self.report_progress()
-        elif self.counter > self.next_batch_boundary:
+        if (
+            self.reporting_batch_size > 0 and self.counter % self.reporting_batch_size == 0
+        ) or self.counter > self.next_batch_boundary:
             self.report_progress()
 
     def report_progress(self) -> None:
@@ -415,7 +417,7 @@ class Action:
         If the caller is using the `run()` method then this will be called automatically.
         """
         if self.batch_timer is None:
-            raise Exception('Action has not been started')
+            raise ValueError('Action has not been started')
 
         # If we did not finish exactly on a reporting batch size report the stats for the final batch
         if self.counter % self.reporting_batch_size != 0:
