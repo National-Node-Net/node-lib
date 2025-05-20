@@ -1,4 +1,7 @@
 # Changelog
+## Unreleased
+### Changed
+- Updated MAINTAINERS.md with updated supplier information.
 
 ## [3.1.1](https://github.com/telicent-oss/telicent-lib/compare/v3.1.0...v3.1.1) (2024-10-28)
 
