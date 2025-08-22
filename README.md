@@ -1,6 +1,6 @@
 # README
 
-**Repository:** `[repository-name]`  
+**Repository:** `node-lib`  
 **Description:** `node-lib provides useful helper libraries for building Adaptors, Mappers and Projectors for the Integration Architecture Node Platform.`  
 **Repository Status:** `Private – NDTP InnerSource`  
 

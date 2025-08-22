@@ -1,6 +1,6 @@
 # Security Policy
 
-**Repository:** `[repository-name]`  
+**Repository:** `node-lib`  
 **Description:** `Details the responsible disclosure process for security vulnerabilities.`  
 
 ## Responsible Disclosure 
