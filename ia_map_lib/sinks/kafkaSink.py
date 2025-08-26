@@ -170,7 +170,8 @@ class KafkaSink(DataSink):
         # Note that this is not an in-depth check of the headers since KafkaProducer will do a more detailed validation
         # of them when we try to send the record
         if record.headers is not None:
-            record.headers = self.normalize_headers(record.headers)
+            # record.headers = self.normalize_headers(record.headers)
+            record.__setattr__("headers", self.normalize_headers(record.headers))
 
         key = self.key_serializer(record.key)
         value = self.value_serializer(record.value)
