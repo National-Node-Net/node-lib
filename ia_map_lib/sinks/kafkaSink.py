@@ -9,7 +9,7 @@ from confluent_kafka import Producer
 from confluent_kafka.serialization import Serializer
 
 from ia_map_lib.config.kafka import kafka_config_factory
-from ia_map_lib.records import Record
+from ia_map_lib.records import Record, RecordUtils
 from ia_map_lib.sinks.dataSink import DataSink
 from ia_map_lib.sinks.serializers import SerializerFunction, Serializers
 from ia_map_lib.utils import check_kafka_broker_available, validate_callable_protocol
@@ -163,6 +163,8 @@ class KafkaSink(DataSink):
     def send(self, record: Record = None):
         if record is None:
             return
+        
+        normalized_record = record
 
         # Kafka expects the record headers to consist of tuples of (str, bytes)
         # Callers might have created tuples of (str, str) for their convenience which we can easily convert into the
@@ -170,16 +172,19 @@ class KafkaSink(DataSink):
         # Note that this is not an in-depth check of the headers since KafkaProducer will do a more detailed validation
         # of them when we try to send the record
         if record.headers is not None:
-            # record.headers = self.normalize_headers(record.headers)
-            record.__setattr__("headers", self.normalize_headers(record.headers))
+            for header in record.headers:
+                key, value = header
+                normalized_record = RecordUtils.replace_or_add_header(record, key, value)
+            # record["headers"] = self.normalize_headers(record["headers"])
+            # record.__setattr__("headers", self.normalize_headers(record.headers))
 
-        key = self.key_serializer(record.key)
-        value = self.value_serializer(record.value)
+        key = self.key_serializer(normalized_record.key)
+        value = self.value_serializer(normalized_record.value)
 
         while True:
             try:
                 self.target.produce(
-                    self.topic, key=key, value=value, headers=record.headers
+                    self.topic, key=key, value=value, headers=normalized_record.headers
                 )
                 self.target.poll(0)
                 break
