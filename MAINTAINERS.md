@@ -1,6 +1,6 @@
 # Maintainers  
 
-**Repository:** `label-builder-service`  
+**Repository:** `node-lib`  
 **Description:** `Lists maintainers responsible for reviewing issues, security, and documentation updates.`  
 
 Current Status: Under NDTP Oversight
