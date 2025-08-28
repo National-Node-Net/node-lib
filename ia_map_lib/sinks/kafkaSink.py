@@ -175,8 +175,6 @@ class KafkaSink(DataSink):
             for header in record.headers:
                 key, value = header
                 normalized_record = RecordUtils.replace_or_add_header(record, key, value)
-            # record["headers"] = self.normalize_headers(record["headers"])
-            # record.__setattr__("headers", self.normalize_headers(record.headers))
 
         key = self.key_serializer(normalized_record.key)
         value = self.value_serializer(normalized_record.value)
