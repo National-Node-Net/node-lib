@@ -113,7 +113,8 @@ def validate_callable_protocol(function: Any, protocol: Any) -> None:
                 raise TypeError(f"Function {function} is missing required parameter {name} of type "
                                 f"{parameter.annotation}")
 
-            if parameter.annotation != actual_parameter.annotation:
+            actual_parameter_class = actual_parameter.annotation if isinstance(actual_parameter.annotation, str) else actual_parameter.annotation.__name__
+            if parameter.annotation != actual_parameter_class:
                 if actual_parameter.annotation == inspect.Signature.empty or parameter.annotation != Any:
                     raise TypeError(f"Wrong parameter type for parameter {name} ({actual_parameter.name}) "
                                     f"for protocol {str(protocol)}, "
