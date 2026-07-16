@@ -31,9 +31,9 @@ NDTP does not accept public code contributions, but we welcome **bug reports and
 
 | Name              | Organisation           | Role               | Contact                |
 |-------------------|------------------------|--------------------|------------------------|
-| [Maintainer Name] | [NDTP / Supplier Name] | Lead Maintainer    | [email@example.com]    |
-| [Maintainer Name] | [NDTP / Supplier Name] | Security Contact   | [security@example.com] |
-| [Maintainer Name] | [NDTP / Supplier Name] | Documentation Lead | [docs@example.com]     |
+| [Maintainer Name] | [NDTP / Supplier Name] | Lead Maintainer    | [email@example.org]    |
+| [Maintainer Name] | [NDTP / Supplier Name] | Security Contact   | [security@example.org] |
+| [Maintainer Name] | [NDTP / Supplier Name] | Documentation Lead | [docs@example.org]     |
 
 For general issues, please **open a GitHub issue** rather than contacting maintainers directly.  
 
@@ -79,7 +79,7 @@ At present, **there is no actively assigned supplier maintaining this repository
 In the meantime:  
 - **Bug reports and documentation feedback** will still be reviewed by NDTP.  
 - **Security vulnerabilities** should be reported via the [responsible disclosure process](./SECURITY.md).  
-- **For any queries, please contact:** **ndtp-contact@example.com** 
+- **For any queries, please contact:** **ndtp-contact@example.org** 
 
 Once a new supplier is engaged, this file will be updated with their details. 
 

@@ -20,3 +20,10 @@ pip install node-lib
 ## Usage
 
 For documentation on how to use node-lib, please see the [documentation index](https://github.com/National-Node-Net/node-lib/blob/main/docs/index.md).
+
+## Licensing
+
+This repository, including all source code, documentation, configuration files, and related materials, is licensed under the:
+
+**NDTP InnerSource Licence – Version 1.0**  
+See [LICENSE.md](LICENSE.md) for the full licence text.

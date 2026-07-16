@@ -1,5 +1,7 @@
 # Changelog
 
+Licensed under the NDTP InnerSource Licence – Version 1.0. For full licensing terms, see [LICENSE.md](LICENSE.md).
+
 ## [3.1.2] - 2026-07-16
 
 ### Changed
