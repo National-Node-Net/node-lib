@@ -19,4 +19,4 @@ pip install node-lib
 
 ## Usage
 
-For documentation on how to use node-lib, please see the [documentation index](https://github.com/National-Digital-Twin/node-lib/blob/main/docs/index.md).
+For documentation on how to use node-lib, please see the [documentation index](https://github.com/National-Node-Net/node-lib/blob/main/docs/index.md).

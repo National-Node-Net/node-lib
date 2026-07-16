@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2] - 2026-07-16
+
+### Changed
+
+- Alignment of GitHub actions to new organisation.
+
+
 ## [3.1.1](https://github.com/telicent-oss/telicent-lib/compare/v3.1.0...v3.1.1) (2024-10-28)
 
 
