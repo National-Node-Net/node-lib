@@ -18,24 +18,12 @@ This project follows **Semantic Versioning (SemVer)** ([semver.org](https://semv
 
 ---
 
-## [Unreleased] 
+## [0.90.0] 2026-08-24
 
-### Added 
+### Initial Features
+
 - Key functionality (in Python) for validation and transformation of data in a data pipeline for data ingestion by a secure-agent-graph instance.
-
-### Fixed 
-- Placeholder for bug fixes and security updates. 
-
-### Changed 
-- Placeholder for changes to existing functionality. 
-
----
-
-## [0.90.0]
-
-### Changed
-
-- Added SPDX headers
+- Added SPDX headers.
 
 ## Future Roadmap to `1.0.0` 
 
