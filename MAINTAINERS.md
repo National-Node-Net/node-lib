@@ -1,0 +1,36 @@
+# Maintainers  
+
+**Repository:** `node-lib`  
+**Description:** `Lists maintainers responsible for reviewing issues, security, and documentation updates.`  
+**SPDX-License-Identifier:** `OGL-UK-3.0`  
+
+Current Status: Under NDTP Oversight
+
+At present, **there is no actively assigned supplier maintaining this repository**. NDTP is currently in the process of engaging new suppliers through its procurement cycle. 
+
+In the meantime:  
+- **Bug reports and documentation feedback** will still be reviewed by NDTP.  
+- **Security vulnerabilities** should be reported via the [responsible disclosure process](./SECURITY.md).  
+- **For any queries, please contact:** **ndtp@businessandtrade.gov.uk** 
+
+Once a new supplier is engaged, this file will be updated with their details. 
+
+---
+
+## How This Repository is Managed  
+
+NDTP repositories remain available even when transitioning between suppliers.  
+During these times, NDTP ensures:  
+- Critical issues are **triaged internally**.  
+- No new **public contributions** are accepted unless approved.  
+- The repository remains available under **open-source governance**.  
+
+---
+
+**Maintained by the National Digital Twin Programme (NDTP).**
+
+© Crown Copyright 2026. This work has been developed by the National Digital Twin Programme and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.  
+
+Licensed under the Open Government Licence v3.0.  
+
+For full licensing terms, see [OGL_LICENCE.md](./OGL_LICENCE.md)

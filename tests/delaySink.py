@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: Apache-2.0
+# Originally developed by Telicent Ltd.; subsequently adapted, enhanced, and maintained by the National Digital Twin Programme.
+
+
+# Copyright (c) Telicent Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Modifications made by the National Digital Twin Programme (NDTP)
+# © Crown Copyright 2026. This work has been developed by the National Digital Twin Programme
+# and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.
+
+
+import threading
+
+from ia_map_lib import Record
+from ia_map_lib.sinks.listSink import ListSink
+
+
+class DelaySink(ListSink):
+    """
+    A sink that simulates delayed sending of records for testing purposes.
+
+    This is basically a simplified version of what is happening behind the scenes of a KafkaSink.  The underlying
+    KafkaProducer batches up records to be sent and sends them to Kafka in batched requests using a background thread.
+    This means that calling send() on the KafkaSink does not mean that Record is immediately sent, and if the
+    application exited on exhaustion of its data source it could exit before all records were actually sent onwards to
+    Kafka.
+
+    However, calling close() on the KafkaProducer does ensure that any outstanding messages are sent.  Again we simulate
+    this with this implementation.
+
+    See various unit test cases that utilise this sink implementation to see the different scenarios we are testing to
+    ensure that a sink is closed when an action finishes/aborts.
+    """
+
+    def __init__(self, delay_time: float = 0.1):
+        super().__init__()
+        self.closed = False
+        self.delay = threading.Event()
+        self.delay_time = delay_time
+        self.delayed: list[Record] = []
+
+        # Start a background thread that sends the records onwards after enforcing a delay on them
+        self.thread = threading.Thread(target=self.__send_delayed__, args=())
+        self.thread.start()
+
+    def send(self, record: Record) -> None:
+        self.delayed.append(record)
+
+    def __send_delayed__(self) -> None:
+        """
+        A background thread that sends each message after a delay
+        """
+        while not self.closed:
+            self.delay.wait(self.delay_time)
+
+            if len(self.delayed) > 0:
+                super().send(self.delayed.pop(0))
+
+    def close(self):
+        # Drain the queue of delayed messages at closure
+        while len(self.delayed) > 0:
+            # Set the delay event to trigger the next delayed record to be sent
+            self.delay.set()
+        self.closed = True

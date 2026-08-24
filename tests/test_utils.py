@@ -1,0 +1,98 @@
+# SPDX-License-Identifier: Apache-2.0
+# Originally developed by Telicent Ltd.; subsequently adapted, enhanced, and maintained by the National Digital Twin Programme.
+
+
+# Copyright (c) Telicent Ltd.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Modifications made by the National Digital Twin Programme (NDTP)
+# © Crown Copyright 2026. This work has been developed by the National Digital Twin Programme
+# and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.
+
+
+import unittest
+from unittest.mock import MagicMock, patch
+
+from ia_map_lib.utils import clean_hostname, generate_group_id
+
+from .test_data.utils_test_hosts import host_data
+
+
+class TestGenerateGroupID(unittest.TestCase):
+
+    @patch('ia_map_lib.utils.os.environ', {})
+    def test_clean_hostname_non_k8s(self):
+
+        for hostname, expected in zip(host_data["hosts"], host_data["expected_hosts"]):
+            result = clean_hostname(hostname)
+            self.assertEqual(result, expected, f"Failed for hostname: {hostname} in non-K8s environment")
+
+    @patch('ia_map_lib.utils.os.environ', {})
+    def test_clean_hostname_max_len(self):
+
+        hostname = 'x' * 300
+        result = clean_hostname(hostname)
+        self.assertEqual(len(result), 200, f"Failed for hostname: {hostname} in non-K8s environment")
+
+    @patch.dict('ia_map_lib.utils.os.environ', {"KUBERNETES_SERVICE_HOST": "some_value"})
+    def test_clean_hostname_k8s(self):
+        for hostname, expected in zip(host_data["k8s_hosts"], host_data["k8s_expected_hosts"]):
+            result = clean_hostname(hostname)
+            self.assertEqual(result, expected, f"Failed for hostname: {hostname} in K8s environment")
+
+
+    @patch('ia_map_lib.utils.socket.gethostname')
+    @patch('ia_map_lib.utils.inspect.stack')
+    def test_generate_group_id_with_predefined_hosts(self, mock_stack, mock_gethostname):
+        mock_frame = MagicMock()
+        mock_frame.filename = "test_filename"
+        mock_frame.lineno = 101
+        mock_stack.return_value = [None, mock_frame]
+
+        mock_hostnames = ["host_one", "host_two", "host_three"]
+        expected_group_ids = [
+            "host_one_5b9a7c76c1",
+            "host_two_5b9a7c76c1",
+            "host_three_5b9a7c76c1"
+        ]
+
+        for mock_hostname, expected_group_id in zip(mock_hostnames, expected_group_ids):
+            mock_gethostname.return_value = mock_hostname
+
+            group_id = generate_group_id()
+
+            self.assertEqual(group_id, expected_group_id)
+
+    @patch('ia_map_lib.utils.socket.gethostname')
+    @patch('ia_map_lib.utils.inspect.stack')
+    def test_generate_group_id_with_predefined_hosts_should_fail(self, mock_stack, mock_gethostname):
+        mock_frame = MagicMock()
+        mock_frame.filename = "test_filename"
+        mock_frame.lineno = 103
+        mock_stack.return_value = [None, mock_frame]
+
+        mock_hostnames = ["host_one", "host_two", "host_three"]
+        expected_group_ids = [
+            "host_one_5b9a7c76c1",
+            "host_two_5b9a7c76c1",
+            "host_three_5b9a7c76c1"
+        ]
+
+        for mock_hostname, expected_group_id in zip(mock_hostnames, expected_group_ids):
+            mock_gethostname.return_value = mock_hostname
+
+            group_id = generate_group_id()
+
+            self.assertNotEqual(group_id, expected_group_id)
+

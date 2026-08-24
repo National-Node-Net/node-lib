@@ -1,0 +1,118 @@
+# SPDX-License-Identifier: Apache-2.0
+# Originally developed by Telicent Ltd.; subsequently adapted, enhanced, and maintained by the National Digital Twin Programme.
+
+
+# Copyright (c) Telicent Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Modifications made by the National Digital Twin Programme (NDTP)
+# © Crown Copyright 2026. This work has been developed by the National Digital Twin Programme
+# and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.
+
+
+from __future__ import annotations
+
+from collections.abc import Iterable
+from unittest import TestCase
+
+from ia_map_lib import Adapter, AutomaticAdapter, Mapper, Projector, Record
+from ia_map_lib.action import Action, InputAction, InputOutputAction, OutputAction
+from ia_map_lib.sinks.listSink import ListSink
+from ia_map_lib.sources.listSource import ListSource
+
+
+class ActionTestCase(TestCase):
+
+    def test_action_not_implemented(self):
+        action = Action(has_error_handler=False, has_reporter=False, disable_metrics=True)
+        self.assertRaises(NotImplementedError, action.generate_id)
+
+
+class OutActionTestCase(TestCase):
+
+    def test_id_is_name(self):
+        action = OutputAction(target=ListSink(), has_error_handler=False, has_reporter=False, disable_metrics=True)
+        self.assertEqual('None-to-In-Memory List', action.generate_id())
+
+    def test_id_is_name_adapter(self):
+        action = Adapter(target=ListSink(), has_error_handler=False, has_reporter=False, disable_metrics=True,
+                         has_data_catalog=False)
+        self.assertEqual('Manual Adapter-to-In-Memory List', action.generate_id())
+
+    def test_id_is_name_automatic_adapter(self):
+        def my_func() -> Iterable[Record]:
+            yield Record(None, None, None, None)
+        action = AutomaticAdapter(
+            adapter_function=my_func, target=ListSink(), has_reporter=False, has_error_handler=False,
+            disable_metrics=True, has_data_catalog=False
+        )
+        self.assertEqual('Automatic Adapter-to-In-Memory List', action.generate_id())
+
+    def test_named_action(self):
+        def my_func() -> Iterable[Record]:
+            yield Record(None, None, None, None)
+        action = AutomaticAdapter(
+            adapter_function=my_func, target=ListSink(), has_error_handler=False, has_reporter=False,
+            name='Test Action', disable_metrics=True, has_data_catalog=False
+        )
+        self.assertEqual('Test-Action', action.generate_id())
+
+
+class InputActionTestCase(TestCase):
+
+    def test_id_is_name(self):
+        action = InputAction(source=ListSource(), has_error_handler=False, has_reporter=False, disable_metrics=True)
+        self.assertEqual(action.generate_id(), 'None-from-In-Memory List(0 records)')
+
+    def test_id_is_name_adapter(self):
+        def my_func(record: Record) -> None:
+            pass # This function is intentionally left empty as part of the test setup.
+        action = Projector(source=ListSource(), has_error_handler=False, has_reporter=False,
+                           projector_function=my_func, target_store='Secure Agent', disable_metrics=True)
+        self.assertEqual('Projector-from-In-Memory List(0 records)', action.generate_id())
+
+    def test_named_action(self):
+        def my_func(record: Record) -> None:
+            pass # This function is intentionally left empty as part of the test setup.
+        action = Projector(source=ListSource(), has_error_handler=False, has_reporter=False,
+                           projector_function=my_func, target_store='Secure Agent', name='Test Action',
+                           disable_metrics=True)
+        self.assertEqual('Test-Action', action.generate_id())
+
+
+class InputOutputActionTestCase(TestCase):
+
+    def test_id_is_name(self):
+        action = InputOutputAction(
+            source=ListSource(), target=ListSink(), has_error_handler=False, has_reporter=False, disable_metrics=True
+        )
+        self.assertEqual('None-from-In-Memory List(0 records)-to-In-Memory List', action.generate_id())
+
+    def test_id_is_name_adapter(self):
+        def my_func(record: Record) -> Record | list[Record] | None:
+            pass # This function is intentionally left empty as part of the test setup.
+        action = Mapper(
+            source=ListSource(), target=ListSink(), has_error_handler=False, has_reporter=False,
+            map_function=my_func, disable_metrics=True
+        )
+        self.assertEqual('Mapper-from-In-Memory List(0 records)-to-In-Memory List', action.generate_id())
+
+    def test_named_action(self):
+        def my_func(record: Record) -> Record | list[Record] | None:
+            pass # This function is intentionally left empty as part of the test setup.
+        action = Mapper(
+            source=ListSource(), target=ListSink(), has_error_handler=False, has_reporter=False, map_function=my_func,
+            name='Test Action', disable_metrics=True
+        )
+        self.assertEqual('Test-Action', action.generate_id())
