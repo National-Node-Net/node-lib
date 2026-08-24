@@ -1,3 +1,26 @@
+# SPDX-License-Identifier: Apache-2.0
+# Originally developed by Telicent Ltd.; subsequently adapted, enhanced, and maintained by the National Digital Twin Programme.
+
+
+# Copyright (c) Telicent Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Modifications made by the National Digital Twin Programme (NDTP)
+# © Crown Copyright 2026. This work has been developed by the National Digital Twin Programme
+# and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.
+
+
 from __future__ import annotations
 
 import inspect
@@ -16,6 +39,7 @@ from ia_map_lib.sources.deserializers import DeserializerFunction, Deserializers
 from ia_map_lib.utils import check_kafka_broker_available, generate_group_id, validate_callable_protocol
 
 logger = logging.getLogger(__name__)
+AUTO_OFFSET_RESET_CONFIG = "auto.offset.reset"
 
 
 def __validate_kafka_deserializer__(instance, name):
@@ -130,9 +154,9 @@ class KafkaSource(DataSource):
 
         check_kafka_broker_available(kafka_config)
 
-        reset_position = kafka_config.get('auto.offset.reset')
+        reset_position = kafka_config.get(AUTO_OFFSET_RESET_CONFIG)
         if reset_position is None:
-            kafka_config['auto.offset.reset'] = 'earliest'
+            kafka_config[AUTO_OFFSET_RESET_CONFIG] = 'earliest'
 
         group_id = kafka_config.get('group.id')
         if group_id is None or len(group_id) == 0:
@@ -152,7 +176,7 @@ class KafkaSource(DataSource):
             kafka_config['enable.auto.commit'] = False
 
         self.broker = kafka_config['bootstrap.servers']
-        self.reset_position = kafka_config['auto.offset.reset']
+        self.reset_position = kafka_config[AUTO_OFFSET_RESET_CONFIG]
         self.needs_seek = False
 
         # Create the consumer
@@ -219,14 +243,9 @@ class KafkaSource(DataSource):
                 # going on with the KafkaConsumer we could be assigned partitions and start reading from them prior
                 # to having the opportunity to seek to our desired position.  If we do seek we do a fresh read so
                 # that we get the correct record, otherwise we could return an incorrect record
-                logger.debug(f"Seeking based on reset_position={self.reset_position}")
-                if self.reset_position == 'beginning':
-                    self.__seek_to_beginning__()
-                    record = self.consumer.poll(timeout=1.0)
-                elif self.reset_position == 'end':
-                    self.__seek_to_end__()
-                    record = self.consumer.poll(timeout=1.0)
+                record = self.__perform_seek__()
                 self.needs_seek = False
+
 
             # If we were needing a seek i.e. we'd just been assigned a partition, but didn't have to explicitly seek
             # then the record will be None, and we'll loop back round again to try reading the next record
@@ -234,10 +253,7 @@ class KafkaSource(DataSource):
                 continue
 
             if record.error() is not None:
-                if "UNKNOWN_TOPIC_OR_PART" in record.error().__str__():
-                    raise SourceNotFoundException(source_name=self.get_source_name())
-                else:
-                    raise RuntimeError(record.error())
+                self.__handle_record_errors__(record)
 
             self.last_offsets[TopicPartition(record.topic(), record.partition())] = record
 
@@ -252,6 +268,20 @@ class KafkaSource(DataSource):
                 value=self.value_deserializer(record.value()),
                 raw=record
             )
+
+    def __perform_seek__(self):
+        logger.debug(f"Seeking based on reset_position={self.reset_position}")
+        if self.reset_position == 'beginning':
+            self.__seek_to_beginning__()
+            return self.consumer.poll(timeout=1.0)
+        elif self.reset_position == 'end':
+            self.__seek_to_end__()
+            return self.consumer.poll(timeout=1.0)
+
+    def __handle_record_errors__(self, record):
+          if "UNKNOWN_TOPIC_OR_PART" in record.error().__str__():
+              raise SourceNotFoundException(source_name=self.get_source_name())
+          raise RuntimeError(record.error())
 
     def remaining(self) -> int | None:
         remaining = None

@@ -1,3 +1,26 @@
+# SPDX-License-Identifier: Apache-2.0
+# Originally developed by Telicent Ltd.; subsequently adapted, enhanced, and maintained by the National Digital Twin Programme.
+
+
+# Copyright (c) Telicent Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Modifications made by the National Digital Twin Programme (NDTP)
+# © Crown Copyright 2026. This work has been developed by the National Digital Twin Programme
+# and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.
+
+
 from __future__ import annotations
 
 import inspect
@@ -50,8 +73,11 @@ def __validate_kafka_serializer__(instance, name):
         # Could be a subclass of our defined SerializerFunction protocol in which case validate it immediately
         # Note, the Serializer class of confluent-kafka also matches the signature of our SerializerFunction so
         # must also confirm it is not a subclass of that.
-        if inspect.isclass(instance) and \
-                issubclass(instance, SerializerFunction) and not issubclass(instance, Serializer):
+        if (
+            inspect.isclass(instance)
+            and issubclass(instance, SerializerFunction)
+            and not issubclass(instance, Serializer)
+        ):
             validate_callable_protocol(instance, SerializerFunction)
 
         elif inspect.ismethod(instance) or inspect.isfunction(instance):
@@ -61,18 +87,27 @@ def __validate_kafka_serializer__(instance, name):
         elif inspect.isclass(instance):
             raise TypeError(
                 f"Provided {name} is not a function/method/Serializer instance but was the class {instance},"
-                "perhaps you meant to pass in an instance of this class instead?")
+                "perhaps you meant to pass in an instance of this class instead?"
+            )
 
         else:
-            raise TypeError(f"Provided {name} is not a function/method/Serializer instance")
+            raise TypeError(
+                f"Provided {name} is not a function/method/Serializer instance"
+            )
 
 
 class KafkaSink(DataSink):
     """A Data Sink backed by Apache Kafka"""
 
-    def __init__(self, topic: str, broker: str | list[str] | None = None, kafka_config: dict | None = None,
-                 debug: bool = False, key_serializer: SerializerFunction | Serializer = Serializers.to_binary,
-                 value_serializer: SerializerFunction | Serializer = Serializers.to_binary):
+    def __init__(
+        self,
+        topic: str,
+        broker: str | list[str] | None = None,
+        kafka_config: dict | None = None,
+        debug: bool = False,
+        key_serializer: SerializerFunction | Serializer = Serializers.to_binary,
+        value_serializer: SerializerFunction | Serializer = Serializers.to_binary,
+    ):
         """
         Creates a new Kafka Data Sink that writes records to the specified topic
 
@@ -100,13 +135,13 @@ class KafkaSink(DataSink):
             warnings.warn(
                 "Parameter 'broker' has been deprecated. Please provide 'kafka_config'.",
                 DeprecationWarning,
-                stacklevel=2
+                stacklevel=2,
             )
         if debug is not None:
             warnings.warn(
                 "Parameter 'debug' has been deprecated. Please use a logger to view debug messages.",
                 DeprecationWarning,
-                stacklevel=2
+                stacklevel=2,
             )
         super().__init__(topic)
 
@@ -118,7 +153,7 @@ class KafkaSink(DataSink):
 
         # There are likely to be some config options specifically for consumers that will raise warnings.
         # These can be sensibly predicted and mitigated.
-        consumer_specific_config = ['auto.offset.reset', 'enable.auto.commit']
+        consumer_specific_config = ["auto.offset.reset", "enable.auto.commit"]
         for exp_config in consumer_specific_config:
             if exp_config in kafka_config:
                 del kafka_config[exp_config]
@@ -135,6 +170,19 @@ class KafkaSink(DataSink):
         self.key_serializer = key_serializer
         self.value_serializer = value_serializer
 
+    def normalize_headers(self, headers):
+        if isinstance(headers, list):
+            for i, header in enumerate(headers):
+                key, value = header
+                if not isinstance(value, bytes):
+                    if isinstance(value, str):
+                        headers[i] = (key, value.encode("utf-8"))
+                    else:
+                        raise TypeError(
+                            "Record headers must be tuples where the value is given as bytes or a str"
+                        )
+            return headers
+
     def send(self, record: Record = None):
         if record is None:
             return
@@ -145,28 +193,20 @@ class KafkaSink(DataSink):
         # Note that this is not an in-depth check of the headers since KafkaProducer will do a more detailed validation
         # of them when we try to send the record
         if record.headers is not None:
-            if isinstance(record.headers, list):
-                for i, header in enumerate(record.headers):
-                    key, value = header
-                    if not isinstance(value, bytes):
-                        if isinstance(value, str):
-                            record.headers[i] = (key, value.encode("utf-8"))
-                        else:
-                            raise TypeError("Record headers must be tuples where the value is given as bytes or a str")
+            record.headers = self.normalize_headers(record.headers)
 
         key = self.key_serializer(record.key)
         value = self.value_serializer(record.value)
 
         while True:
             try:
-                self.target.produce(self.topic,
-                                    key=key,
-                                    value=value,
-                                    headers=record.headers)
+                self.target.produce(
+                    self.topic, key=key, value=value, headers=record.headers
+                )
                 self.target.poll(0)
                 break
             except BufferError:
-                logger.debug('Waiting for buffer to clear')
+                logger.debug("Waiting for buffer to clear")
                 self.target.poll(1)
 
     def close(self):
