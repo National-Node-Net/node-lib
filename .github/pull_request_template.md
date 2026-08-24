@@ -1,32 +1,27 @@
-## Sensitive Credential Checks
+<!--
+ Before you open a pull request please review the following guidelines and tip and edit the relevant sections.
+ Thank you for contributing! 
+ -->
 
-- [ ] As the author of these changes, I have checked for any sensitive credentials prior to this review being requested.
-- [ ] As a reviewer of these changes, I have checked for any sensitive credentials prior to approving this merge.
+### Type of Change
 
-<!--- When merging the branch to dev please use the SQUASH AND MERGE --->
+<!-- Select - i.e. 
+  - new feature
+  - bug fix
+-->
 
-## Motivation and Context
+### Description 
 
-<!--- Why is this change required? What problem does it solve? -->
-<!--- If it fixes an open issue, please link to the issue here. -->
+<!-- Describe the scope of your change - i.e. 
+  - what the change does how it was tested 
+  - any known limitations
+  - any tests or examples exercised on your modified code
+-->
 
-## Description
+### Checklist
 
-- Describe your changes in detail
+<!-- [Place an '[X]' (no spaces) in all applicable fields. Please add/remove fields as required.] -->
 
-## How Has This Been Tested?
-
-<!--- Please describe in detail how you tested your changes. -->
-<!--- Include details of your testing environment, and the tests you ran. -->
-<!--- How does your change affect other areas of the code, etc. -->
-
-## Screenshots (if appropriate):
-
-## Checklist:
-
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
-<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
-- [ ] It contains only changes required by issue (does not contain other PR)
-- [ ] Includes link to an issue (if apply)
-- [ ] I have added tests to cover my changes.
-
+- [ ] Test code against a test environment and not just on a local cluster 
+- [ ] Reference relevant issue(s) where applicable and close them after merging
+- [ ] Update any documentation and relevant `CHANGELOG.md` files
