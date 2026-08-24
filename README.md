@@ -19,7 +19,7 @@ pip install node-lib
 ```
 
 ## Usage
-For documentation on how to use node-lib, please see the [documentation index](https://github.com/National-Digital-Twin/node-lib/blob/main/docs/index.md).
+For documentation on how to use node-lib, please see the [documentation index](https://github.com/National-Node-Net/node-lib/blob/main/docs/index.md).
 
 ## Public Funding Acknowledgment  
 This repository has been developed with public funding as part of the National Digital Twin Programme (NDTP), a UK Government initiative. NDTP, alongside its partners, has invested in this work to advance open, secure, and reusable digital twin technologies for any organisation, whether from the public or private sector, irrespective of size.  

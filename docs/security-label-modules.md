@@ -1,6 +1,6 @@
 # SecurityLabel Modules in node-lib 
 
-node-lib can be leveraged alongside the [label-builder](https://github.com/National-Digital-Twin/label-builder)  to 
+node-lib can be leveraged alongside the [label-builder](https://github.com/National-Node-Net/label-builder)  to 
 facilitate the validation of data headers against a predefined model that encapsulates a security policy framework. 
 While there is no fully operational implementation of policy-based access control (PBAC) at this time, the library allows 
 for the validation of data headers against a chosen model to ensure that all required fields are populated and that the 
@@ -60,5 +60,5 @@ headers =  [('policyInformation', {'DH': data_header_model.model_dump()}),
 record = RecordUtils.add_headers(record, headers)
 ```
 
-Please refer to the documentation of [label-builder](https://github.com/National-Digital-Twin/label-builder) 
+Please refer to the documentation of [label-builder](https://github.com/National-Node-Net/label-builder) 
 for further information and full use case examples.
