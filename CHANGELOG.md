@@ -31,6 +31,12 @@ This project follows **Semantic Versioning (SemVer)** ([semver.org](https://semv
 
 ---
 
+## [0.90.0]
+
+### Changed
+
+- Added SPDX headers
+
 ## Future Roadmap to `1.0.0` 
 
 The `0.90.x` series is part of NDTP’s **pre-stable development cycle**, meaning: 
