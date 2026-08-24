@@ -40,7 +40,7 @@ dev = [
     "pre-commit==4.2.0",
     "ruff==0.9.4",
     "types-pytz==2025.1.0.20250318",
-    "urllib3==2.3.0",
+    "urllib3==2.7.0",
     "types-requests==2.32.0.20250306",
     "mypy==1.15.0",
     "mkdocs==1.6.1",
