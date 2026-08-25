@@ -30,7 +30,7 @@ from werkzeug.wrappers import Request, Response
 from ia_map_lib.exceptions import ConfigurationException
 from ia_map_lib.logging import LoggerFactory
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

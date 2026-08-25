@@ -29,7 +29,7 @@ from typing import Any
 
 from ia_map_lib.config.configSource import ConfigSource, EnvironmentSource
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

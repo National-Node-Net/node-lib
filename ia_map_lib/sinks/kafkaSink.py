@@ -37,7 +37,7 @@ from ia_map_lib.sinks.dataSink import DataSink
 from ia_map_lib.sinks.serializers import SerializerFunction, Serializers
 from ia_map_lib.utils import check_kafka_broker_available, validate_callable_protocol
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

@@ -34,7 +34,7 @@ from ia_map_lib.config import Configurator
 from ia_map_lib.records import Record, RecordUtils
 from ia_map_lib.sinks import KafkaSink
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

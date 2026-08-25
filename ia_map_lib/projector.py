@@ -30,7 +30,7 @@ from ia_map_lib.sources import DataSource
 from ia_map_lib.status import Status
 from ia_map_lib.utils import validate_callable_protocol
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

@@ -34,7 +34,7 @@ from typing import Any
 
 from confluent_kafka.admin import AdminClient
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

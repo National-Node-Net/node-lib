@@ -25,7 +25,7 @@ from ia_map_lib.sinks.dataSink import DataSink
 from ia_map_lib.sinks.kafkaSink import KafkaSink
 from ia_map_lib.sinks.serializers import RdfSerializer, SerializerFunction, Serializers
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");

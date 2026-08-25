@@ -27,7 +27,7 @@ from ia_map_lib.mapper import Mapper
 from ia_map_lib.projector import Projector
 from ia_map_lib.records import Record, RecordAdapter, RecordMapper, RecordProjector, RecordUtils
 
-__license__ = """
+"""
 Copyright (c) Telicent Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");
