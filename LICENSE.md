@@ -1,4 +1,7 @@
-# License 
+# License  
+**Repository:** `node-lib`  
+**Description:** `Defines the licensing terms for the source code in this repository.`  
+**SPDX-License-Identifier:** `Apache-2.0` 
 
 ## Copyright Notice  
 © Crown Copyright 2026. This work has been developed by the National Digital Twin Programme and is legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST) as the governing entity.
@@ -197,7 +200,7 @@ This work is licensed under the Apache License, Version 2.0.
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright 2025 Crown Copyright, National Digital Twin Programme,
+   Crown Copyright 2026, National Digital Twin Programme,
    legally attributed to the UK's Department for Business, Innovation, Science and Trade (BIST)
 
    Licensed under the Apache License, Version 2.0 (the "License");
