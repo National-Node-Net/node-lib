@@ -5,7 +5,7 @@ name: Stale Dependabot PR alerts
 
 on:
   schedule:
-    - cron: '23 8 * * *'
+        - cron: '35 14 * * *' # Temporary pilot schedule; restore 08:23 UTC after testing.
   workflow_dispatch:
     inputs:
       days_before_stale:
