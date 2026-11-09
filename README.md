@@ -1,3 +1,5 @@
+![OSPO compliance](https://raw.githubusercontent.com/National-Node-Net/ndt-overwatch/sync/governance-badges/repositories/node-lib/ospo-compliance.svg) ![Develop activity](https://raw.githubusercontent.com/National-Node-Net/ndt-overwatch/sync/governance-badges/repositories/node-lib/develop-activity.svg) ![Last checked](https://raw.githubusercontent.com/National-Node-Net/ndt-overwatch/sync/governance-badges/repositories/node-lib/last-checked.svg)
+
 # README
 
 **Repository:** `node-lib`  
